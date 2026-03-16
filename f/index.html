@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yag Social — A rede que deveria existir desde o inicio</title>
+<meta name="description" content="Yag Social: rede social exclusiva para homens gay no Brasil. Perfis verificados, sem censura, sem bots. R$69,90/mes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #f8b506;
+  --pink: #e91e8c;
+  --red: #ff3b3b;
+  --bg: #000;
+  --surface: #111;
+  --surface-alt: #0a0a0a;
+  --border: #1a1a1a;
+  --border-light: #333;
+  --text: #fff;
+  --text-muted: #888;
+  --text-dim: #666;
+  --text-dimmer: #555;
+  --gold-border: rgba(248,181,6,0.4);
+  --gold-glow: rgba(248,181,6,0.1);
+  --gold-selection: rgba(248,181,6,0.3);
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+::selection {
+  background: var(--gold-selection);
+  color: var(--text);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+
+a { text-decoration: none; color: inherit; }
+
+/* ========== BUTTONS ========== */
+.btn-gold {
+  display: inline-block;
+  background: var(--gold);
+  color: #000;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 18px 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-gold:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px var(--gold-glow), 0 0 60px rgba(248,181,6,0.06);
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 60px;
+  overflow: hidden;
+}
+
+.hero__float {
+  position: absolute;
+  z-index: 0;
+  border-radius: 16px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.hero__float--right {
+  top: 10%;
+  right: 5%;
+  width: 180px;
+  height: 220px;
+  opacity: 0.25;
+  transform: rotate(6deg);
+  filter: blur(1px);
+}
+
+.hero__float--left {
+  bottom: 10%;
+  left: 5%;
+  width: 160px;
+  height: 160px;
+  opacity: 0.2;
+  transform: rotate(-4deg);
+  filter: blur(1px);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero__logo {
+  height: 48px;
+  margin: 0 auto 32px;
+}
+
+.hero__headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.15;
+  color: var(--text);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero__sub {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--gold);
+  margin-top: 20px;
+}
+
+.hero__cta {
+  margin-top: 32px;
+}
+
+.hero__cancel {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* ========== COMPARISON ========== */
+.compare {
+  padding: 80px 24px;
+}
+
+.compare__inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.compare__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.15;
+}
+
+.compare__title-them {
+  color: var(--red);
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+}
+
+.compare__title-vs {
+  color: var(--text-dimmer);
+  font-size: 0.7em;
+  margin: 0 12px;
+}
+
+.compare__title-yag {
+  color: var(--gold);
+}
+
+.compare__rows {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.compare__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.compare__row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.compare__card {
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.compare__card--them {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+}
+
+.compare__card--yag {
+  background: var(--surface);
+  border: 1px solid var(--gold-border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.compare__card--yag:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.compare__icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.compare__icon--red { color: var(--red); }
+.compare__icon--gold { color: var(--gold); }
+
+.compare__card--them .compare__text {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.compare__card--yag .compare__text {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ========== SHOWCASE ========== */
+.showcase {
+  padding: 80px 0;
+}
+
+.showcase__header {
+  text-align: center;
+  padding: 0 24px;
+}
+
+.showcase__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--text);
+}
+
+.showcase__sub {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.showcase__carousel {
+  margin-top: 40px;
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 32px 24px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.showcase__carousel::-webkit-scrollbar { display: none; }
+
+.showcase__mockup {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: 240px;
+  text-align: center;
+}
+
+.showcase__frame {
+  width: 240px;
+  height: 480px;
+  border-radius: 28px;
+  border: 2px solid var(--border-light);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.showcase__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.showcase__label {
+  margin-top: 16px;
+}
+
+.showcase__label-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--gold);
+}
+
+.showcase__label-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.showcase__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.showcase__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-light);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease;
+}
+
+.showcase__dot.is-active {
+  background: var(--gold);
+}
+
+/* ========== PRICING + TESTIMONIAL ========== */
+.pricing {
+  padding: 80px 24px;
+}
+
+.pricing__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.pricing__image {
+  flex: 0 0 55%;
+}
+
+.pricing__image img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+.pricing__card-wrap {
+  flex: 0 0 45%;
+}
+
+.pricing__card {
+  background: var(--surface);
+  border: 1.5px solid var(--gold);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.pricing__amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+
+.pricing__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 48px;
+  color: var(--gold);
+}
+
+.pricing__period {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.pricing__divider {
+  height: 1px;
+  background: #222;
+  margin: 20px 0;
+}
+
+.pricing__features {
+  list-style: none;
+  text-align: left;
+}
+
+.pricing__feature {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pricing__feature-check {
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pricing__btn {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.pricing__note {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+}
+
+.footer__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer__logo {
+  height: 22px;
+}
+
+.footer__links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer__link {
+  color: var(--text-muted);
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.footer__link:hover {
+  color: var(--gold);
+}
+
+.footer__copy {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .hero__float--right {
+    width: 120px;
+    height: 150px;
+    top: 5%;
+    right: -10px;
+    opacity: 0.15;
+  }
+
+  .hero__float--left {
+    width: 100px;
+    height: 100px;
+    bottom: 5%;
+    left: -10px;
+    opacity: 0.12;
+  }
+
+  .compare__row {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing__inner {
+    flex-direction: column;
+  }
+
+  .pricing__image {
+    flex: none;
+    width: 100%;
+  }
+
+  .pricing__card-wrap {
+    flex: none;
+    width: 100%;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__links {
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <img src="../img/jantar.jpg" alt="" class="hero__float hero__float--right" loading="lazy">
+  <img src="../img/conexao-real.jpg" alt="" class="hero__float hero__float--left" loading="lazy">
+
+  <div class="hero__content">
+    <img src="../img/logo-app.png" alt="Yag Social" class="hero__logo">
+    <h1 class="hero__headline">Cansou de app que te trata como produto?</h1>
+    <p class="hero__sub">O Yag e a rede que deveria existir desde o inicio.</p>
+    <div class="hero__cta">
+      <a href="#preco" class="btn-gold">Conhecer o Yag — R$69,90/mes</a>
+    </div>
+    <p class="hero__cancel">Cancele quando quiser</p>
+  </div>
+</section>
+
+<!-- ==================== COMPARISON ==================== -->
+<section class="compare">
+  <div class="compare__inner">
+    <div class="compare__title">
+      <span class="compare__title-them">Eles</span>
+      <span class="compare__title-vs">vs</span>
+      <span class="compare__title-yag">Yag.</span>
+    </div>
+
+    <div class="compare__rows">
+      <!-- Row 1 -->
+      <div class="compare__row">
+        <div class="compare__card compare__card--them">
+          <span class="compare__icon compare__icon--red">&#10060;</span>
+          <span class="compare__text">Perfis falsos, bots, catfish</span>
+        </div>
+        <div class="compare__card compare__card--yag">
+          <span class="compare__icon compare__icon--gold">&#10003;</span>
+          <span class="compare__text">100% verificados. Documento + selfie.</span>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="compare__row">
+        <div class="compare__card compare__card--them">
+          <span class="compare__icon compare__icon--red">&#10060;</span>
+          <span class="compare__text">Gratis = qualquer um entra</span>
+        </div>
+        <div class="compare__card compare__card--yag">
+          <span class="compare__icon compare__icon--gold">&#10003;</span>
+          <span class="compare__text">So assinantes. O preco filtra quem nao leva a serio.</span>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="compare__row">
+        <div class="compare__card compare__card--them">
+          <span class="compare__icon compare__icon--red">&#10060;</span>
+          <span class="compare__text">Censurado pela App Store. Sem liberdade.</span>
+        </div>
+        <div class="compare__card compare__card--yag">
+          <span class="compare__icon compare__icon--gold">&#10003;</span>
+          <span class="compare__text">Direto no navegador. Sem censura. Sem restricao.</span>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="compare__row">
+        <div class="compare__card compare__card--them">
+          <span class="compare__icon compare__icon--red">&#10060;</span>
+          <span class="compare__text">Seus dados vendidos pra anunciante</span>
+        </div>
+        <div class="compare__card compare__card--yag">
+          <span class="compare__icon compare__icon--gold">&#10003;</span>
+          <span class="compare__text">Moderacao 24/7. Dados protegidos. Sempre.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SHOWCASE ==================== -->
+<section class="showcase">
+  <div class="showcase__header">
+    <h2 class="showcase__title">Veja como funciona</h2>
+    <p class="showcase__sub">Direto no navegador. Sem download.</p>
+  </div>
+
+  <div class="showcase__carousel" id="carousel">
+    <div class="showcase__mockup">
+      <div class="showcase__frame">
+        <img src="../screenshots/10_feed_mobile.png" alt="Feed do Yag" loading="lazy">
+      </div>
+      <div class="showcase__label">
+        <div class="showcase__label-name">Feed</div>
+        <div class="showcase__label-desc">Posts, curtidas e comentarios</div>
+      </div>
+    </div>
+
+    <div class="showcase__mockup">
+      <div class="showcase__frame">
+        <img src="../screenshots/09_radar_mobile.png" alt="Radar do Yag" loading="lazy">
+      </div>
+      <div class="showcase__label">
+        <div class="showcase__label-name">Radar</div>
+        <div class="showcase__label-desc">Encontre pessoas proximas</div>
+      </div>
+    </div>
+
+    <div class="showcase__mockup">
+      <div class="showcase__frame">
+        <img src="../screenshots/12_profile_detail_mobile.png" alt="Perfil no Yag" loading="lazy">
+      </div>
+      <div class="showcase__label">
+        <div class="showcase__label-name">Perfis</div>
+        <div class="showcase__label-desc">Verificados e detalhados</div>
+      </div>
+    </div>
+
+    <div class="showcase__mockup">
+      <div class="showcase__frame">
+        <img src="../screenshots/07_chat.png" alt="Chat do Yag" loading="lazy">
+      </div>
+      <div class="showcase__label">
+        <div class="showcase__label-name">Chat</div>
+        <div class="showcase__label-desc">Conversas privadas</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="showcase__dots" id="dots">
+    <button class="showcase__dot is-active" data-index="0" aria-label="Slide 1"></button>
+    <button class="showcase__dot" data-index="1" aria-label="Slide 2"></button>
+    <button class="showcase__dot" data-index="2" aria-label="Slide 3"></button>
+    <button class="showcase__dot" data-index="3" aria-label="Slide 4"></button>
+  </div>
+</section>
+
+<!-- ==================== PRICING ==================== -->
+<section class="pricing" id="preco">
+  <div class="pricing__inner">
+    <div class="pricing__image">
+      <img src="../img/mensagem.jpg" alt="A proxima conexao comeca com uma mensagem" loading="lazy">
+    </div>
+
+    <div class="pricing__card-wrap">
+      <div class="pricing__card">
+        <div class="pricing__amount">
+          <span class="pricing__value">R$ 69,90</span>
+          <span class="pricing__period">/mes</span>
+        </div>
+        <div class="pricing__divider"></div>
+        <ul class="pricing__features">
+          <li class="pricing__feature">
+            <span class="pricing__feature-check">&#10003;</span>
+            Perfis 100% verificados
+          </li>
+          <li class="pricing__feature">
+            <span class="pricing__feature-check">&#10003;</span>
+            Chat privado ilimitado
+          </li>
+          <li class="pricing__feature">
+            <span class="pricing__feature-check">&#10003;</span>
+            Radar de proximidade
+          </li>
+          <li class="pricing__feature">
+            <span class="pricing__feature-check">&#10003;</span>
+            Feed sem censura
+          </li>
+          <li class="pricing__feature">
+            <span class="pricing__feature-check">&#10003;</span>
+            Cancele quando quiser
+          </li>
+        </ul>
+        <a href="#" class="btn-gold pricing__btn">Fazer parte</a>
+        <p class="pricing__note">Cancele quando quiser. Sem surpresa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <img src="../img/logo-app.png" alt="Yag" class="footer__logo">
+    <nav class="footer__links">
+      <a href="#" class="footer__link">Termos</a>
+      <a href="#" class="footer__link">Privacidade</a>
+      <a href="#" class="footer__link">Contato</a>
+    </nav>
+    <span class="footer__copy">&copy; 2025 Yag Social</span>
+  </div>
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+(function() {
+  'use strict';
+
+  /* ---- Intersection Observer: comparison rows stagger ---- */
+  var rows = document.querySelectorAll('.compare__row');
+  var rowObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var row = entry.target;
+        var index = Array.prototype.indexOf.call(rows, row);
+        setTimeout(function() {
+          row.classList.add('is-visible');
+        }, index * 150);
+        rowObserver.unobserve(row);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  rows.forEach(function(row) {
+    rowObserver.observe(row);
+  });
+
+  /* ---- Carousel: autoplay, dots, pause on hover ---- */
+  var carousel = document.getElementById('carousel');
+  var dots = document.querySelectorAll('.showcase__dot');
+  var mockups = carousel.querySelectorAll('.showcase__mockup');
+  var currentSlide = 0;
+  var totalSlides = mockups.length;
+  var autoplayInterval = null;
+
+  function updateDots(index) {
+    dots.forEach(function(d) { d.classList.remove('is-active'); });
+    if (dots[index]) dots[index].classList.add('is-active');
+  }
+
+  function scrollToSlide(index) {
+    if (!mockups[index]) return;
+    var mockup = mockups[index];
+    var scrollLeft = mockup.offsetLeft - (carousel.offsetWidth / 2) + (mockup.offsetWidth / 2);
+    carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+    currentSlide = index;
+    updateDots(index);
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    scrollToSlide(currentSlide);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayInterval = setInterval(nextSlide, 3000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+    }
+  }
+
+  /* Dots click */
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      var index = parseInt(this.getAttribute('data-index'), 10);
+      scrollToSlide(index);
+      stopAutoplay();
+      startAutoplay();
+    });
+  });
+
+  /* Sync dots on manual scroll */
+  var scrollTimeout;
+  carousel.addEventListener('scroll', function() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function() {
+      var center = carousel.scrollLeft + carousel.offsetWidth / 2;
+      var closest = 0;
+      var minDist = Infinity;
+      mockups.forEach(function(m, i) {
+        var dist = Math.abs(m.offsetLeft + m.offsetWidth / 2 - center);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      currentSlide = closest;
+      updateDots(closest);
+    }, 100);
+  });
+
+  /* Pause on hover */
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+
+  startAutoplay();
+
+})();
+</script>
+</body>
+</html>

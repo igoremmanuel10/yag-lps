@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG Social — Conexoes reais. So pra quem e real.</title>
+<meta name="description" content="A rede social exclusiva para homens que curtem homens. 100% verificada, sem fakes. Perfis reais, chat privado, radar de proximidade.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #f8b506;
+  --gold-dark: #c99204;
+  --gold-glow: rgba(248, 181, 6, 0.25);
+  --pink: #e91e8c;
+  --black: #000000;
+  --white: #ffffff;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(248, 181, 6, 0.3);
+  color: var(--white);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+
+/* ============================================
+   HERO — ONE SCREEN
+   ============================================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.75) 0%,
+      rgba(0,0,0,0.50) 40%,
+      rgba(0,0,0,0.55) 70%,
+      rgba(0,0,0,0.85) 100%
+    );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 600px;
+}
+
+/* Logo */
+.hero__logo {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 32px;
+  filter: drop-shadow(0 0 20px var(--gold-glow)) drop-shadow(0 0 40px rgba(248, 181, 6, 0.1));
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.2s forwards;
+}
+
+@media (min-width: 768px) {
+  .hero__logo {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 40px;
+  }
+}
+
+/* Tagline */
+.hero__tagline {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.4s forwards;
+}
+
+@media (min-width: 768px) {
+  .hero__tagline {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+}
+
+/* Subtitle */
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.55s forwards;
+}
+
+@media (min-width: 768px) {
+  .hero__subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+  }
+}
+
+/* CTA Button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: #000;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 16px 40px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 24px rgba(248, 181, 6, 0.2);
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.7s forwards;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(248, 181, 6, 0.35);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+}
+
+.cta-btn__price {
+  font-weight: 400;
+  opacity: 0.7;
+  font-size: 0.85rem;
+  margin-left: 2px;
+}
+
+/* Scroll indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.2s forwards;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(248,181,6,0.5) 0%, transparent 100%);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+.hero__scroll-text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ============================================
+   BELOW THE FOLD
+   ============================================ */
+
+.below-fold {
+  padding: 100px 24px 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* App Showcase */
+.app-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.app-showcase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.phone-frame {
+  position: relative;
+  width: 260px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 2px rgba(248,181,6,0.15),
+    0 32px 80px rgba(0,0,0,0.6),
+    0 0 60px rgba(248,181,6,0.06);
+}
+
+.phone-frame img {
+  width: 100%;
+  display: block;
+  border-radius: 32px;
+}
+
+@media (min-width: 768px) {
+  .phone-frame {
+    width: 300px;
+    border-radius: 36px;
+  }
+  .phone-frame img {
+    border-radius: 36px;
+  }
+}
+
+/* Features strip */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s;
+}
+
+.features.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.feature__label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+@media (min-width: 768px) {
+  .features { gap: 72px; }
+  .feature__icon svg { width: 32px; height: 32px; }
+  .feature__label { font-size: 0.8rem; }
+}
+
+/* Pricing card */
+.pricing {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+}
+
+.pricing.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pricing-card {
+  background: linear-gradient(165deg, #111 0%, #0a0a0a 100%);
+  border: 1px solid rgba(248,181,6,0.1);
+  border-radius: 16px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.pricing-card__badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(248,181,6,0.25);
+  border-radius: 100px;
+  padding: 6px 16px;
+  margin-bottom: 28px;
+}
+
+.pricing-card__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.pricing-card__period {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 32px;
+}
+
+.pricing-card .cta-btn {
+  width: 100%;
+  opacity: 1;
+  animation: none;
+  font-size: 0.9rem;
+  padding: 15px 32px;
+}
+
+.pricing-card__details {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pricing-card__detail {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+}
+
+.pricing-card__detail span {
+  color: rgba(248,181,6,0.6);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.footer__brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.footer__copy {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.2);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO — ONE SCREEN ========== -->
+<section class="hero">
+  <div class="hero__bg">
+    <img src="../img/conexao-tres.jpg" alt="" loading="eager">
+  </div>
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <img src="../img/logo-app.png" alt="YAG" class="hero__logo">
+    <h1 class="hero__tagline">Conexões reais.<br>Só pra quem é real.</h1>
+    <p class="hero__subtitle">100% verificado &middot; Só assinantes</p>
+    <a href="#pricing" class="cta-btn">
+      Fazer parte <span class="cta-btn__price">&mdash; R$69,90/mês</span>
+    </a>
+  </div>
+
+  <div class="hero__scroll">
+    <div class="hero__scroll-line"></div>
+    <span class="hero__scroll-text">scroll</span>
+  </div>
+</section>
+
+<!-- ========== BELOW THE FOLD ========== -->
+<div class="below-fold">
+
+  <!-- App Mockup -->
+  <section class="app-showcase" data-reveal>
+    <div class="phone-frame">
+      <img src="../screenshots/10_feed_mobile.png" alt="YAG Feed">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" data-reveal>
+    <div class="feature">
+      <div class="feature__icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+      </div>
+      <span class="feature__label">Feed</span>
+    </div>
+    <div class="feature">
+      <div class="feature__icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" style="fill:var(--gold)"/>
+        </svg>
+      </div>
+      <span class="feature__label">Radar</span>
+    </div>
+    <div class="feature">
+      <div class="feature__icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 4H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"/>
+          <path d="M16 2v4M8 2v4M3 10h18"/>
+        </svg>
+      </div>
+      <span class="feature__label">Eventos</span>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing" data-reveal>
+    <div class="pricing-card">
+      <div class="pricing-card__badge">Acesso completo</div>
+      <div class="pricing-card__price">R$69,90</div>
+      <div class="pricing-card__period">por mês</div>
+      <a href="#" class="cta-btn">Fazer parte agora</a>
+      <div class="pricing-card__details">
+        <div class="pricing-card__detail"><span>&check;</span> Perfis 100% verificados</div>
+        <div class="pricing-card__detail"><span>&check;</span> Chat privado ilimitado</div>
+        <div class="pricing-card__detail"><span>&check;</span> Radar de proximidade</div>
+        <div class="pricing-card__detail"><span>&check;</span> Eventos exclusivos</div>
+        <div class="pricing-card__detail"><span>&check;</span> Cancele quando quiser</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer__brand">YAG Social</div>
+  <div class="footer__copy">&copy; 2026 YAG Social. Todos os direitos reservados.</div>
+</footer>
+
+<!-- ========== JS ========== -->
+<script>
+// Scroll-triggered reveal
+const reveals = document.querySelectorAll('[data-reveal]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+reveals.forEach(el => observer.observe(el));
+
+// Parallax-lite on hero background
+const heroBg = document.querySelector('.hero__bg img');
+const heroSection = document.querySelector('.hero');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const heroH = heroSection.offsetHeight;
+  if (scrollY < heroH) {
+    const parallax = scrollY * 0.3;
+    heroBg.style.transform = `translateY(${parallax}px) scale(1.05)`;
+  }
+}, { passive: true });
+
+// Hide scroll indicator on scroll
+const scrollIndicator = document.querySelector('.hero__scroll');
+let scrollHidden = false;
+window.addEventListener('scroll', () => {
+  if (!scrollHidden && window.scrollY > 80) {
+    scrollIndicator.style.transition = 'opacity 0.4s ease';
+    scrollIndicator.style.opacity = '0';
+    scrollHidden = true;
+  }
+}, { passive: true });
+</script>
+</body>
+</html>

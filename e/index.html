@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yag Social — Rede social exclusiva para homens gay no Brasil</title>
+  <meta name="description" content="Yag Social: conexao real, 100% verificado, so assinantes, zero fake. A rede social exclusiva para homens gay no Brasil.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ======= RESET & BASE ======= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #f8b506;
+      --pink: #e91e8c;
+      --bg: #000;
+      --surface: #0a0a0a;
+      --text: #fff;
+      --muted: #888;
+      --dim: #666;
+      --border: #222;
+      --border-light: #1a1a1a;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    ::selection {
+      background: rgba(248, 181, 6, 0.3);
+      color: #fff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(248, 181, 6, 0.25);
+    }
+
+    /* ======= 1. HERO ======= */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      will-change: transform;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero__nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      z-index: 10;
+    }
+
+    .hero__logo {
+      height: 36px;
+      width: auto;
+    }
+
+    .hero__nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero__nav-link {
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 16px;
+      transition: opacity 0.3s;
+    }
+    .hero__nav-link:hover { opacity: 0.7; }
+
+    .hero__nav .btn-gold {
+      font-size: 13px;
+      padding: 10px 20px;
+    }
+
+    .hero__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 48px 24px 80px;
+      z-index: 5;
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(48px, 10vw, 80px);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+
+    .hero__title span {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero__sub {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: #fff;
+      margin-top: 16px;
+      opacity: 0.85;
+    }
+
+    .hero__cta {
+      margin-top: 24px;
+    }
+
+    .hero__cta .btn-gold {
+      padding: 18px 40px;
+      font-size: 16px;
+    }
+
+    .hero__cancel {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    .hero__arrow {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      color: #fff;
+      font-size: 24px;
+      opacity: 0.5;
+      animation: bounce 1.5s ease-in-out infinite;
+      text-decoration: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ======= 2. STATS ======= */
+    .stats {
+      background: var(--surface);
+      padding: 60px 24px;
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stats__item {
+      text-align: center;
+      padding: 20px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .stats__item:last-child { border-right: none; }
+
+    .stats__number {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(36px, 6vw, 56px);
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stats__label {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: #fff;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    /* ======= 3. TELAS ======= */
+    .telas {
+      padding: 100px 24px;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .telas__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .telas__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 48px);
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .telas__sub {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .telas__row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 20px 0;
+    }
+
+    .mockup {
+      flex-shrink: 0;
+      width: 220px;
+      height: 440px;
+      border-radius: 28px;
+      border: 2px solid #333;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      z-index: 1;
+      background: #111;
+    }
+
+    .mockup-wrap:nth-child(1) .mockup { transform: rotate(-4deg); }
+    .mockup-wrap:nth-child(2) .mockup { transform: rotate(-1deg); }
+    .mockup-wrap:nth-child(3) .mockup { transform: rotate(2deg); }
+    .mockup-wrap:nth-child(4) .mockup { transform: rotate(5deg); }
+
+    .mockup-wrap:hover .mockup {
+      transform: rotate(0deg) scale(1.08);
+      box-shadow: 0 20px 60px rgba(248, 181, 6, 0.15);
+      z-index: 2;
+    }
+
+    .mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .mockup-wrap {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mockup__info {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .mockup__name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .mockup__desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ======= 4. GALERIA ======= */
+    .galeria {
+      padding: 80px 24px;
+      position: relative;
+    }
+
+    .galeria__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 300px 250px;
+      gap: 12px;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .galeria__img {
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .galeria__img:hover {
+      transform: scale(1.03);
+      border-color: rgba(248, 181, 6, 0.5);
+    }
+
+    .galeria__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .galeria__img--wide {
+      grid-column: span 2;
+    }
+
+    .galeria__overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid rgba(248, 181, 6, 0.1);
+    }
+
+    .galeria__overlay-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--gold);
+    }
+
+    .galeria__overlay-sub {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: #fff;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+
+    .galeria__overlay .btn-gold {
+      margin-top: 24px;
+    }
+
+    /* ======= 5. FOOTER ======= */
+    .footer {
+      border-top: 1px solid var(--border-light);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 60px;
+    }
+
+    .footer__logo {
+      height: 22px;
+      width: auto;
+    }
+
+    .footer__links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer__links a {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #555;
+      transition: color 0.3s;
+    }
+    .footer__links a:hover { color: var(--gold); }
+
+    .footer__copy {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #555;
+    }
+
+    /* ======= RESPONSIVE ======= */
+    @media (max-width: 768px) {
+      .hero__content {
+        padding: 32px 20px 70px;
+      }
+
+      /* Stats: 2x2 grid */
+      .stats__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stats__item:nth-child(2) { border-right: none; }
+      .stats__item:nth-child(1),
+      .stats__item:nth-child(2) {
+        border-bottom: 1px solid var(--border);
+      }
+      .stats__item:nth-child(3) { border-right: 1px solid var(--border); }
+
+      /* Telas: horizontal scroll */
+      .telas__row {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 20px 24px;
+        gap: 16px;
+      }
+      .telas__row::-webkit-scrollbar { display: none; }
+
+      .mockup-wrap {
+        scroll-snap-align: center;
+      }
+      .mockup {
+        width: 200px;
+        height: 400px;
+      }
+
+      /* Galeria: 1 column */
+      .galeria__grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .galeria__img--wide {
+        grid-column: span 1;
+      }
+      .galeria__img img {
+        height: 240px;
+      }
+
+      .galeria__overlay {
+        padding: 28px 24px;
+        width: calc(100% - 48px);
+        max-width: 320px;
+      }
+      .galeria__overlay-title { font-size: 22px; }
+
+      /* Footer */
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero__nav-link { display: none; }
+      .hero__title { letter-spacing: 0.02em; }
+      .hero__cta .btn-gold { width: 100%; padding: 18px 24px; }
+    }
+
+    /* ======= ANIMATIONS ======= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 1. HERO ===== -->
+  <section class="hero" id="hero">
+    <img src="../img/conexao-tres.jpg" alt="Conexao entre homens" class="hero__bg" id="heroBg">
+    <div class="hero__overlay"></div>
+
+    <nav class="hero__nav">
+      <img src="../img/logo-app.png" alt="Yag Social" class="hero__logo">
+      <div class="hero__nav-actions">
+        <a href="#" class="hero__nav-link">Entrar</a>
+        <a href="#" class="btn-gold">Fazer parte</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <h1 class="hero__title">
+        CONECTE.<span>DE VERDADE.</span>
+      </h1>
+      <p class="hero__sub">100% verificado. So assinantes. Zero fake.</p>
+      <div class="hero__cta">
+        <a href="#" class="btn-gold">Fazer parte &mdash; R$69,90/mes</a>
+        <small class="hero__cancel">Cancele quando quiser</small>
+      </div>
+    </div>
+
+    <a href="#stats" class="hero__arrow" aria-label="Rolar para baixo">&darr;</a>
+  </section>
+
+  <!-- ===== 2. STATS ===== -->
+  <section class="stats" id="stats">
+    <div class="stats__grid">
+      <div class="stats__item">
+        <div class="stats__number" data-target="100" data-suffix="%">0</div>
+        <div class="stats__label">verificados</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__number" data-target="24" data-suffix="/7" data-is-static="true">24/7</div>
+        <div class="stats__label">moderacao</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__number" data-target="0" data-suffix="" data-is-static="true">0</div>
+        <div class="stats__label">fakes</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__number" data-target="69" data-prefix="R$" data-suffix=",90">0</div>
+        <div class="stats__label">por mes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. TELAS ===== -->
+  <section class="telas fade-in">
+    <div class="telas__header">
+      <h2 class="telas__title">VEJA POR DENTRO.</h2>
+      <p class="telas__sub">Direto no navegador. Sem download.</p>
+    </div>
+
+    <div class="telas__row">
+      <div class="mockup-wrap">
+        <div class="mockup">
+          <img src="../screenshots/10_feed_mobile.png" alt="Feed do Yag" loading="lazy">
+        </div>
+        <div class="mockup__info">
+          <div class="mockup__name">Feed</div>
+          <div class="mockup__desc">Publicacoes reais</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup">
+          <img src="../screenshots/09_radar_mobile.png" alt="Radar do Yag" loading="lazy">
+        </div>
+        <div class="mockup__info">
+          <div class="mockup__name">Radar</div>
+          <div class="mockup__desc">Quem esta perto</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup">
+          <img src="../screenshots/12_profile_detail_mobile.png" alt="Perfil no Yag" loading="lazy">
+        </div>
+        <div class="mockup__info">
+          <div class="mockup__name">Perfil</div>
+          <div class="mockup__desc">100% verificado</div>
+        </div>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup">
+          <img src="../screenshots/07_chat.png" alt="Chat do Yag" loading="lazy">
+        </div>
+        <div class="mockup__info">
+          <div class="mockup__name">Chat</div>
+          <div class="mockup__desc">Mensagens privadas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. GALERIA ===== -->
+  <section class="galeria fade-in">
+    <div class="galeria__grid">
+      <div class="galeria__img galeria__img--wide">
+        <img src="../img/jantar.jpg" alt="Casal jantando" loading="lazy">
+      </div>
+      <div class="galeria__img">
+        <img src="../img/conexao-real.jpg" alt="Conexao real" loading="lazy">
+      </div>
+      <div class="galeria__img">
+        <img src="../img/chat-sauna.jpg" alt="Chat na sauna" loading="lazy">
+      </div>
+      <div class="galeria__img">
+        <img src="../img/mensagem.jpg" alt="Mensagem no Yag" loading="lazy">
+      </div>
+      <div class="galeria__img">
+        <img src="../img/conselhos.jpg" alt="Conselhos" loading="lazy">
+      </div>
+
+      <div class="galeria__overlay">
+        <h3 class="galeria__overlay-title">Isso e o Yag.</h3>
+        <p class="galeria__overlay-sub">Conexao real. Sem filtro.</p>
+        <a href="#" class="btn-gold">Fazer parte</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. FOOTER ===== -->
+  <footer class="footer">
+    <img src="../img/logo-app.png" alt="Yag" class="footer__logo">
+    <div class="footer__links">
+      <a href="#">Termos</a>
+      <a href="#">Privacidade</a>
+      <a href="#">Ajuda</a>
+    </div>
+    <span class="footer__copy">&copy; 2025 Yag</span>
+  </footer>
+
+  <script>
+    /* ======= PARALLAX HERO ======= */
+    (function() {
+      const heroBg = document.getElementById('heroBg');
+      let ticking = false;
+
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            const scrollY = window.scrollY;
+            const heroH = document.getElementById('hero').offsetHeight;
+            if (scrollY < heroH) {
+              const offset = Math.min(scrollY * 0.3, 50);
+              heroBg.style.transform = 'translateY(' + offset + 'px)';
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+    /* ======= COUNT-UP STATS ======= */
+    (function() {
+      function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function animateNumber(el) {
+        const target = parseInt(el.getAttribute('data-target'));
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const isStatic = el.getAttribute('data-is-static') === 'true';
+
+        if (isStatic) return;
+
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeOut(progress);
+          const current = Math.round(eased * target);
+          el.textContent = prefix + current + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        }
+
+        el.textContent = prefix + '0' + suffix;
+        requestAnimationFrame(update);
+      }
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const numbers = entry.target.querySelectorAll('.stats__number');
+            numbers.forEach(animateNumber);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const statsSection = document.querySelector('.stats');
+      if (statsSection) observer.observe(statsSection);
+    })();
+
+    /* ======= FADE-IN ON SCROLL ======= */
+    (function() {
+      const fades = document.querySelectorAll('.fade-in');
+      const fadeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      fades.forEach(function(el) { fadeObserver.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
