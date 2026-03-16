@@ -186,6 +186,178 @@ body {
   transform: rotate(2deg);
 }
 
+/* Phone Mockup */
+.phone-mockup {
+  width: 280px;
+  height: 500px;
+  background: #000;
+  border: 3px solid #333;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow-screenshot);
+  transform: rotate(2deg);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.phone-mockup * { box-sizing: border-box; }
+
+.phone-notch {
+  width: 120px;
+  height: 28px;
+  background: #000;
+  border-radius: 0 0 18px 18px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.phone-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px 8px;
+  background: #111;
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.phone-navbar .phone-logo {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--yellow);
+  letter-spacing: -0.02em;
+}
+
+.phone-navbar .phone-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.phone-navbar .phone-icons svg {
+  width: 18px;
+  height: 18px;
+}
+
+.phone-feed {
+  flex: 1;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.phone-post {
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.phone-post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+}
+
+.phone-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--yellow);
+  flex-shrink: 0;
+}
+
+.phone-username {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.phone-username span {
+  font-weight: 400;
+  color: #666;
+  font-size: 12px;
+}
+
+.phone-post-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.phone-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 14px 4px;
+}
+
+.phone-post-actions svg {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.phone-post-likes {
+  padding: 2px 14px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.phone-post-caption {
+  padding: 4px 14px 12px;
+  font-size: 12px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.phone-post-caption strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.phone-tabbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0 14px;
+  background: #111;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.phone-tabbar svg {
+  width: 22px;
+  height: 22px;
+}
+
+.phone-tabbar .tab-add {
+  width: 28px;
+  height: 28px;
+  background: var(--yellow);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-tabbar .tab-add svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+  .phone-mockup {
+    width: 240px;
+    height: 430px;
+    margin: 0 auto;
+    transform: rotate(2deg);
+  }
+}
+
 /* ============================
    2. PROVA SOCIAL
    ============================ */
@@ -766,7 +938,50 @@ body {
         <p class="fine">Sem download. Acessa no navegador. Cancele quando quiser.</p>
       </div>
       <div class="hero-image reveal" style="transition-delay:0.15s">
-        <img src="../screenshots/10_feed_mobile.png" alt="YAG Feed" class="screenshot" style="transform:rotate(2deg)">
+        <!-- Phone Mockup -->
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-navbar">
+            <div class="phone-logo">YAG</div>
+            <div class="phone-icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+          </div>
+          <div class="phone-feed">
+            <!-- Post 1 -->
+            <div class="phone-post">
+              <div class="phone-post-header">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=64&h=64&fit=crop&crop=face" alt="" class="phone-avatar">
+                <div class="phone-username">Lucas, 24 <span>* SP</span></div>
+              </div>
+              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face" alt="" class="phone-post-img" style="height:200px">
+              <div class="phone-post-actions">
+                <svg viewBox="0 0 24 24" fill="#ff4466" stroke="#ff4466" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              </div>
+              <div class="phone-post-likes">82 curtidas</div>
+              <div class="phone-post-caption"><strong>Lucas</strong> sabado a noite com a galera &#x1F525;</div>
+            </div>
+            <!-- Post 2 (parcial) -->
+            <div class="phone-post">
+              <div class="phone-post-header">
+                <img src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?w=64&h=64&fit=crop&crop=face" alt="" class="phone-avatar">
+                <div class="phone-username">Andre, 28 <span>* RJ</span></div>
+              </div>
+              <img src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?w=300&h=150&fit=crop&crop=face" alt="" class="phone-post-img" style="height:100px">
+            </div>
+          </div>
+          <div class="phone-tabbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <div class="tab-add"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+        </div>
+        <!-- /Phone Mockup -->
       </div>
     </div>
   </div>
