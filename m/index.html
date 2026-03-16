@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG - Rede Social Gay Brasileira</title>
+<meta name="description" content="YAG. Gente real. A rede social gay brasileira. Feed, Radar, Chat. 100% verificado. R$ 69,90/mes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;font-weight:400;color:#111;background:#f5f0e8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ========== TEXTURE ========== */
+.paper-bg{background:#f5f0e8;position:relative}
+.paper-bg::before{content:'';position:absolute;inset:0;background:
+  repeating-conic-gradient(rgba(0,0,0,.015) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+  pointer-events:none;z-index:0}
+
+/* ========== TYPOGRAPHY ========== */
+.sora{font-family:'Sora',sans-serif}
+.mono{font-family:'Space Mono',monospace}
+.inter{font-family:'Inter',sans-serif}
+
+/* ========== UTILITY ========== */
+.section-inner{max-width:1100px;margin:0 auto;padding:80px 24px;position:relative;z-index:1}
+@media(max-width:640px){.section-inner{padding:56px 18px}}
+
+/* ========== STICKER ========== */
+.sticker{display:inline-block;padding:8px 18px;border:2.5px solid #111;font-family:'Sora',sans-serif;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.04em;line-height:1;white-space:nowrap}
+.sticker--yellow{background:#f8b506;color:#111}
+.sticker--black{background:#111;color:#f8b506}
+.sticker--red{background:#d62828;color:#fff}
+
+/* ========== TAPE ========== */
+.tape{position:absolute;width:90px;height:28px;background:rgba(255,255,255,.35);border:1px solid rgba(0,0,0,.06);z-index:10;pointer-events:none}
+
+/* ========== POLAROID ========== */
+.polaroid{background:#fff;padding:8px 8px 32px;box-shadow:2px 4px 16px rgba(0,0,0,.13);position:relative}
+.polaroid img{width:100%;display:block}
+
+/* ========== STAMP BUTTON ========== */
+.btn-stamp{display:inline-block;padding:16px 40px;border:3px solid #111;background:#f8b506;color:#111;font-family:'Sora',sans-serif;font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.06em;transform:rotate(-1deg);transition:transform .2s,box-shadow .2s;cursor:pointer}
+.btn-stamp:hover{transform:rotate(0deg) scale(1.04);box-shadow:4px 6px 0 #111}
+.btn-stamp--dark{background:#111;color:#f8b506;border-color:#f8b506}
+
+/* ========== REVEAL ========== */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ========== CHECK SVG ========== */
+.hand-check{width:22px;height:22px;flex-shrink:0}
+
+/* ======================================================================
+   SECTION 1 — HERO
+   ====================================================================== */
+#hero{min-height:100vh;position:relative;display:flex;align-items:center}
+#hero::before{content:'';position:absolute;inset:0;background:
+  repeating-conic-gradient(rgba(0,0,0,.012) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+  pointer-events:none}
+
+.hero-inner{max-width:1100px;margin:0 auto;padding:40px 24px 80px;width:100%;position:relative;z-index:1}
+
+.hero-logo{position:relative;display:inline-block;margin-bottom:48px}
+.hero-logo .tape{top:-6px;left:10px;transform:rotate(12deg)}
+.hero-logo img{position:relative;z-index:2}
+
+.hero-content{display:flex;gap:48px;align-items:center;flex-wrap:wrap}
+.hero-text{flex:1 1 400px}
+.hero-visual{flex:1 1 300px;display:flex;justify-content:center;position:relative}
+
+.hero-headline{position:relative;display:inline-block;margin-bottom:20px}
+.hero-headline-bg{position:absolute;bottom:4px;left:-6px;right:-6px;height:28px;background:#f8b506;transform:rotate(1deg);z-index:0;border-radius:2px}
+.hero-headline h1{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(52px,8vw,90px);color:#111;line-height:.95;transform:rotate(-2deg);position:relative;z-index:1;letter-spacing:-.02em}
+
+.hero-sub{font-family:'Space Mono',monospace;font-size:clamp(13px,2vw,16px);color:#111;margin-bottom:32px;opacity:.85;letter-spacing:.01em}
+
+.hero-stickers{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stickers .sticker:first-child{transform:rotate(5deg)}
+.hero-stickers .sticker:last-child{transform:rotate(-3deg)}
+
+.hero-fine{font-family:'Space Mono',monospace;font-size:12px;color:#555;margin-top:20px}
+
+.hero-photo{position:relative}
+.hero-photo .polaroid{transform:rotate(3deg);max-width:300px}
+.hero-photo .tape{top:-10px;left:50%;margin-left:-45px;transform:rotate(-8deg)}
+
+@media(max-width:768px){
+  .hero-content{flex-direction:column;text-align:center;align-items:center}
+  .hero-stickers{justify-content:center}
+  .hero-photo .polaroid{max-width:240px;transform:rotate(2deg)}
+  .hero-logo{margin-bottom:32px}
+}
+
+/* ======================================================================
+   SECTION 2 — MARQUEE
+   ====================================================================== */
+#marquee-bar{background:#111;padding:14px 0;overflow:hidden;white-space:nowrap;position:relative}
+.marquee-track{display:inline-flex;animation:marquee 18s linear infinite}
+.marquee-track span{font-family:'Space Mono',monospace;font-size:14px;color:#f8b506;text-transform:uppercase;letter-spacing:.08em;padding:0 32px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ======================================================================
+   SECTION 3 — PROBLEMA
+   ====================================================================== */
+#problema .prob-headline{text-align:center;margin-bottom:56px}
+#problema .prob-headline h2{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(28px,5vw,44px);display:inline;color:#111}
+#problema .prob-headline .strike{text-decoration:line-through;text-decoration-color:#d62828;text-decoration-thickness:3px}
+#problema .prob-headline .handwritten{font-family:'Space Mono',monospace;font-weight:700;color:#d62828;transform:rotate(-2deg);display:inline-block;font-size:clamp(22px,4vw,36px);margin-left:8px;position:relative;top:-4px}
+
+.postits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:900px;margin:0 auto}
+.postit{background:#fff8dc;padding:28px 24px;box-shadow:2px 3px 10px rgba(0,0,0,.1);position:relative;font-family:'Space Mono',monospace;font-size:15px;font-weight:400;line-height:1.5;color:#222}
+.postit:nth-child(1){transform:rotate(-2deg)}
+.postit:nth-child(2){transform:rotate(3deg)}
+.postit:nth-child(3){transform:rotate(-1deg)}
+.postit:nth-child(4){transform:rotate(4deg)}
+.postit-x{position:absolute;top:8px;right:12px;width:28px;height:28px}
+.postit-x line{stroke:#d62828;stroke-width:3;stroke-linecap:round}
+
+@media(max-width:640px){
+  .postits{grid-template-columns:1fr 1fr;gap:16px}
+  .postit{padding:20px 16px;font-size:13px}
+}
+@media(max-width:400px){.postits{grid-template-columns:1fr}}
+
+/* ======================================================================
+   SECTION 4 — SOLUCAO
+   ====================================================================== */
+#solucao{background:#111;color:#fff}
+#solucao .section-inner{display:flex;gap:56px;align-items:center;flex-wrap:wrap}
+.solucao-text{flex:1 1 400px}
+.solucao-text h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,5vw,48px);margin-bottom:24px;position:relative;display:inline-block}
+.solucao-text h2 .underline-y{position:absolute;bottom:2px;left:-4px;right:-4px;height:14px;background:#f8b506;z-index:-1;transform:rotate(.5deg);border-radius:2px}
+.solucao-text p{font-family:'Inter',sans-serif;font-weight:300;font-size:18px;line-height:1.7;color:rgba(255,255,255,.82);max-width:500px}
+.solucao-visual{flex:1 1 280px;display:flex;justify-content:center;position:relative}
+.solucao-visual .polaroid{transform:rotate(-2deg);max-width:280px}
+.solucao-visual .tape{top:-10px;right:20px;transform:rotate(15deg)}
+
+@media(max-width:768px){
+  #solucao .section-inner{flex-direction:column;text-align:center;align-items:center}
+  .solucao-visual .polaroid{max-width:240px}
+}
+
+/* ======================================================================
+   SECTION 5 — FEATURES
+   ====================================================================== */
+#features .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 32px;max-width:960px;margin:0 auto}
+.feature-block{position:relative}
+.feature-block:nth-child(1){transform:translateY(20px)}
+.feature-block:nth-child(2){transform:translateY(-10px)}
+.feature-block:nth-child(3){transform:translateY(10px)}
+.feature-block:nth-child(4){transform:translateY(-20px)}
+.feature-block .polaroid{max-width:260px;margin:0 auto}
+.feature-block:nth-child(1) .polaroid{transform:rotate(3deg)}
+.feature-block:nth-child(2) .polaroid{transform:rotate(-2deg)}
+.feature-block:nth-child(3) .polaroid{transform:rotate(1deg)}
+.feature-block:nth-child(4) .polaroid{transform:rotate(-3deg)}
+.feature-block .tape{top:-8px;left:50%;margin-left:-45px}
+.feature-block:nth-child(1) .tape{transform:rotate(-10deg)}
+.feature-block:nth-child(2) .tape{transform:rotate(8deg)}
+.feature-block:nth-child(3) .tape{transform:rotate(-5deg)}
+.feature-block:nth-child(4) .tape{transform:rotate(12deg)}
+
+.feature-label{margin-top:16px;text-align:center}
+.feature-label h3{font-family:'Sora',sans-serif;font-weight:800;font-size:22px;display:inline;position:relative}
+.feature-label h3 .underline-y{position:absolute;bottom:0;left:-4px;right:-4px;height:10px;background:#f8b506;z-index:-1;transform:rotate(.5deg)}
+.feature-label p{font-family:'Space Mono',monospace;font-size:13px;color:#444;margin-top:6px}
+
+@media(max-width:640px){
+  #features .features-grid{grid-template-columns:1fr;gap:48px}
+  .feature-block{transform:none!important}
+  .feature-block .polaroid{max-width:220px}
+}
+
+/* ======================================================================
+   SECTION 6 — COMPARATIVO
+   ====================================================================== */
+#comparativo{background:#f8b506;position:relative}
+#comparativo .section-inner{max-width:800px}
+.comp-headline{text-align:center;margin-bottom:48px;font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(32px,6vw,52px)}
+.comp-headline .strike{text-decoration:line-through;text-decoration-color:#d62828;text-decoration-thickness:3px;color:#d62828;opacity:.7}
+.comp-headline .vs{font-family:'Space Mono',monospace;font-size:.5em;vertical-align:middle;margin:0 12px;color:#444}
+
+.comp-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.comp-col{padding:32px 28px;border-radius:2px;position:relative}
+.comp-col--them{background:#fff;border:2.5px solid #111;transform:rotate(-1deg);color:#555}
+.comp-col--yag{background:#111;color:#f8b506;transform:rotate(1deg)}
+.comp-col h4{font-family:'Sora',sans-serif;font-weight:800;font-size:20px;margin-bottom:24px;text-transform:uppercase;letter-spacing:.04em}
+.comp-col--them h4{text-decoration:line-through;text-decoration-color:#d62828;text-decoration-thickness:2px}
+.comp-col ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+.comp-col ul li{font-family:'Space Mono',monospace;font-size:14px;line-height:1.5;display:flex;align-items:flex-start;gap:10px}
+.comp-icon{flex-shrink:0;width:18px;height:18px;margin-top:2px}
+.comp-col--them li{opacity:.65}
+
+@media(max-width:640px){
+  .comp-cols{grid-template-columns:1fr;gap:16px}
+  .comp-col{transform:none!important;padding:24px 20px}
+}
+
+/* ======================================================================
+   SECTION 7 — MANIFESTO
+   ====================================================================== */
+#manifesto{background:#111;color:#fff}
+.manifesto-text{max-width:700px;margin:0 auto;text-align:center}
+.manifesto-text p{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(18px,3vw,24px);line-height:1.6;margin-bottom:20px;color:rgba(255,255,255,.8)}
+.manifesto-shout{position:relative;display:inline-block;margin:32px 0 24px}
+.manifesto-shout-bg{position:absolute;inset:-8px -12px;background:#f8b506;transform:rotate(-1deg);z-index:0;border-radius:2px}
+.manifesto-shout span{position:relative;z-index:1;font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(32px,6vw,56px);color:#111;display:block;transform:rotate(-1deg)}
+.manifesto-end{font-family:'Inter',sans-serif;font-weight:300;font-size:18px;color:rgba(255,255,255,.7);margin-top:16px}
+
+/* ======================================================================
+   SECTION 8 — PRECO
+   ====================================================================== */
+#preco .section-inner{text-align:center}
+.preco-valor{position:relative;display:inline-block;margin-bottom:8px}
+.preco-circle{position:absolute;inset:-18px -28px;z-index:0}
+.preco-circle ellipse{fill:none;stroke:#f8b506;stroke-width:4;stroke-dasharray:8 4}
+.preco-valor span{position:relative;z-index:1;font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(56px,10vw,80px);color:#111;letter-spacing:-.03em}
+.preco-mes{font-family:'Space Mono',monospace;font-size:20px;color:#444;margin-bottom:8px}
+.preco-tagline{font-family:'Space Mono',monospace;font-style:italic;font-size:15px;color:#666;margin-bottom:36px}
+.preco-list{list-style:none;display:flex;flex-direction:column;gap:14px;align-items:center;margin-bottom:40px}
+.preco-list li{font-family:'Inter',sans-serif;font-weight:400;font-size:16px;display:flex;align-items:center;gap:10px;color:#222}
+
+/* ======================================================================
+   SECTION 9 — FAQ
+   ====================================================================== */
+#faq{background:#111}
+#faq .section-inner{max-width:720px}
+#faq h2{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(28px,5vw,44px);color:#f8b506;transform:rotate(1deg);margin-bottom:40px;text-align:center}
+.faq-item{border:2px solid #f8b506;margin-bottom:12px;overflow:hidden}
+.faq-q{width:100%;text-align:left;padding:18px 24px;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:#f8b506;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;background:transparent;border:none;transition:background .2s}
+.faq-q:hover{background:rgba(248,181,6,.08)}
+.faq-q .arrow{font-size:20px;transition:transform .3s;flex-shrink:0;font-family:'Space Mono',monospace}
+.faq-item.open .faq-q .arrow{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.faq-a-inner{padding:0 24px 20px;font-family:'Space Mono',monospace;font-size:14px;color:rgba(255,255,255,.75);line-height:1.6}
+.faq-item.open .faq-a{max-height:200px}
+
+/* ======================================================================
+   SECTION 10 — CTA FINAL
+   ====================================================================== */
+#cta-final{background:#f8b506}
+#cta-final .section-inner{text-align:center;padding:80px 24px 64px}
+.cta-final-h{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,7vw,56px);transform:rotate(-1deg);color:#111;margin-bottom:8px}
+.cta-final-sub{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(20px,4vw,32px);color:#111;margin-bottom:40px;opacity:.85}
+.cta-final-btn{display:inline-block;padding:20px 56px;background:#111;color:#f8b506;font-family:'Sora',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.06em;border:none;transition:transform .2s,box-shadow .2s}
+.cta-final-btn:hover{transform:scale(1.05);box-shadow:4px 6px 0 rgba(0,0,0,.3)}
+.cta-final-footer{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:12px;opacity:.7}
+.cta-final-footer img{height:28px}
+.cta-final-footer span{font-family:'Space Mono',monospace;font-size:13px;color:#111}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     SECTION 1 — HERO
+     ================================================================ -->
+<section id="hero" class="paper-bg">
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <div class="tape"></div>
+      <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-headline reveal">
+          <div class="hero-headline-bg"></div>
+          <h1>GENTE REAL.</h1>
+        </div>
+        <p class="hero-sub reveal">a rede social gay brasileira</p>
+        <div class="hero-stickers reveal">
+          <span class="sticker sticker--yellow">100% REAL</span>
+          <span class="sticker sticker--black">ZERO FAKE</span>
+        </div>
+        <a href="#preco" class="btn-stamp reveal">Quero entrar</a>
+        <p class="hero-fine reveal">R$ 69,90/mes &middot; sem download &middot; cancele quando quiser</p>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="hero-photo">
+          <div class="tape"></div>
+          <div class="polaroid">
+            <img src="../screenshots/10_feed_mobile.png" alt="Feed do YAG" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 2 — MARQUEE BAR
+     ================================================================ -->
+<div id="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>100% VERIFICADO</span><span>SO ASSINANTES</span><span>ZERO FAKES</span><span>SEM DOWNLOAD</span><span>100% VERIFICADO</span><span>SO ASSINANTES</span><span>ZERO FAKES</span><span>SEM DOWNLOAD</span><span>100% VERIFICADO</span><span>SO ASSINANTES</span><span>ZERO FAKES</span><span>SEM DOWNLOAD</span><span>100% VERIFICADO</span><span>SO ASSINANTES</span><span>ZERO FAKES</span><span>SEM DOWNLOAD</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 3 — PROBLEMA
+     ================================================================ -->
+<section id="problema" class="paper-bg">
+  <div class="section-inner">
+    <div class="prob-headline reveal">
+      <h2>O mercado gay digital <span class="strike">esta quebrado</span></h2>
+      <span class="handwritten">ta uma merda</span>
+    </div>
+
+    <div class="postits reveal">
+      <div class="postit">
+        Apps cheios de bots
+        <svg class="postit-x" viewBox="0 0 28 28"><line x1="6" y1="6" x2="22" y2="22"/><line x1="22" y1="6" x2="6" y2="22"/></svg>
+      </div>
+      <div class="postit">
+        R$ 120/mes pra ver propaganda
+        <svg class="postit-x" viewBox="0 0 28 28"><line x1="6" y1="6" x2="22" y2="22"/><line x1="22" y1="6" x2="6" y2="22"/></svg>
+      </div>
+      <div class="postit">
+        Apps gringos que cagam pro Brasil
+        <svg class="postit-x" viewBox="0 0 28 28"><line x1="6" y1="6" x2="22" y2="22"/><line x1="22" y1="6" x2="6" y2="22"/></svg>
+      </div>
+      <div class="postit">
+        Seus dados vendidos
+        <svg class="postit-x" viewBox="0 0 28 28"><line x1="6" y1="6" x2="22" y2="22"/><line x1="22" y1="6" x2="6" y2="22"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 4 — SOLUCAO
+     ================================================================ -->
+<section id="solucao">
+  <div class="section-inner">
+    <div class="solucao-text reveal">
+      <h2>A gente construiu o nosso.<span class="underline-y"></span></h2>
+      <p>Feed pra se expressar. Radar pra saber quem ta perto. Chat pra conversar de verdade.</p>
+    </div>
+    <div class="solucao-visual reveal">
+      <div class="tape"></div>
+      <div class="polaroid">
+        <img src="../screenshots/09_radar_mobile.png" alt="Radar do YAG" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 5 — FEATURES
+     ================================================================ -->
+<section id="features" class="paper-bg">
+  <div class="section-inner">
+    <div class="features-grid">
+
+      <div class="feature-block reveal">
+        <div class="polaroid" style="position:relative">
+          <div class="tape"></div>
+          <img src="../screenshots/09_radar_mobile.png" alt="Radar" loading="lazy">
+        </div>
+        <div class="feature-label">
+          <h3>RADAR<span class="underline-y"></span></h3>
+          <p>Quem ta perto. De verdade.</p>
+        </div>
+      </div>
+
+      <div class="feature-block reveal">
+        <div class="polaroid" style="position:relative">
+          <div class="tape"></div>
+          <img src="../screenshots/10_feed_mobile.png" alt="Feed" loading="lazy">
+        </div>
+        <div class="feature-label">
+          <h3>FEED<span class="underline-y"></span></h3>
+          <p>Poste. Curta. Comente. Gente real.</p>
+        </div>
+      </div>
+
+      <div class="feature-block reveal">
+        <div class="polaroid" style="position:relative">
+          <div class="tape"></div>
+          <img src="../screenshots/07_chat.png" alt="Chat" loading="lazy">
+        </div>
+        <div class="feature-label">
+          <h3>CHAT<span class="underline-y"></span></h3>
+          <p>Conversas reais. Sem bot.</p>
+        </div>
+      </div>
+
+      <div class="feature-block reveal">
+        <div class="polaroid" style="position:relative">
+          <div class="tape"></div>
+          <img src="../screenshots/12_profile_detail_mobile.png" alt="Perfil" loading="lazy">
+        </div>
+        <div class="feature-label">
+          <h3>PERFIL<span class="underline-y"></span></h3>
+          <p>Todo mundo mostra a cara.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 6 — COMPARATIVO
+     ================================================================ -->
+<section id="comparativo">
+  <div class="section-inner">
+    <div class="comp-headline reveal">
+      <span class="strike">ELES</span><span class="vs">vs</span><span>YAG</span>
+    </div>
+
+    <div class="comp-cols reveal">
+      <div class="comp-col comp-col--them">
+        <h4>Os outros</h4>
+        <ul>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><line x1="4" y1="4" x2="14" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/></svg>
+            R$ 120+/mes com propaganda
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><line x1="4" y1="4" x2="14" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Cheio de fakes e bots
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><line x1="4" y1="4" x2="14" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Precisa baixar app
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><line x1="4" y1="4" x2="14" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Seus dados vendidos
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><line x1="4" y1="4" x2="14" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/><line x1="14" y1="4" x2="4" y2="14" stroke="#d62828" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Zero verificacao
+          </li>
+        </ul>
+      </div>
+      <div class="comp-col comp-col--yag">
+        <h4>YAG</h4>
+        <ul>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><polyline points="3,10 7,14 15,4" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            R$ 69,90/mes. So isso.
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><polyline points="3,10 7,14 15,4" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            100% verificado
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><polyline points="3,10 7,14 15,4" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Navegador. Sem download.
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><polyline points="3,10 7,14 15,4" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Seus dados sao seus
+          </li>
+          <li>
+            <svg class="comp-icon" viewBox="0 0 18 18"><polyline points="3,10 7,14 15,4" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Todo mundo verificado
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 7 — MANIFESTO
+     ================================================================ -->
+<section id="manifesto">
+  <div class="section-inner">
+    <div class="manifesto-text reveal">
+      <p>A gente sempre precisou se esconder.</p>
+      <p>Criaram um mundo digital pra gente. So que nao era nosso.</p>
+      <div class="manifesto-shout">
+        <div class="manifesto-shout-bg"></div>
+        <span>A GENTE CANSOU.</span>
+      </div>
+      <p class="manifesto-end">Aqui todo mundo e real. Isso e o YAG.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 8 — PRECO
+     ================================================================ -->
+<section id="preco" class="paper-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="preco-valor">
+        <svg class="preco-circle" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <ellipse cx="160" cy="60" rx="148" ry="52" transform="rotate(-2 160 60)"/>
+        </svg>
+        <span>R$ 69,90</span>
+      </div>
+      <p class="preco-mes">/mes</p>
+      <p class="preco-tagline">Menos que uma noite fora.</p>
+      <ul class="preco-list">
+        <li>
+          <svg class="hand-check" viewBox="0 0 22 22"><path d="M4 12 L9 17 L18 5" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Todos verificados
+        </li>
+        <li>
+          <svg class="hand-check" viewBox="0 0 22 22"><path d="M4 12 L9 17 L18 5" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Chat ilimitado
+        </li>
+        <li>
+          <svg class="hand-check" viewBox="0 0 22 22"><path d="M4 12 L9 17 L18 5" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Radar por proximidade
+        </li>
+        <li>
+          <svg class="hand-check" viewBox="0 0 22 22"><path d="M4 12 L9 17 L18 5" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Feed completo
+        </li>
+        <li>
+          <svg class="hand-check" viewBox="0 0 22 22"><path d="M4 12 L9 17 L18 5" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Cancele quando quiser
+        </li>
+      </ul>
+      <a href="#" class="btn-stamp" style="transform:rotate(-2deg)">Assinar agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 9 — FAQ
+     ================================================================ -->
+<section id="faq">
+  <div class="section-inner">
+    <h2 class="reveal">PERGUNTAS</h2>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false">
+        Preciso baixar algum app?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Nao. Navegador. Chrome, Safari, qualquer um.</div></div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false">
+        Tem fake?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Zero. Todo mundo e verificado e paga pra estar.</div></div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false">
+        Posso cancelar?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Sim. Quando quiser. Sem burocracia.</div></div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false">
+        Diferenca pro Grindr?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">YAG e comunidade: feed, radar, chat. Nao e grid de foto.</div></div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" aria-expanded="false">
+        E seguro?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Homofobia = ban em 15 min. Moderacao ativa.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 10 — CTA FINAL
+     ================================================================ -->
+<section id="cta-final">
+  <div class="section-inner">
+    <h2 class="cta-final-h reveal">Seu lugar.</h2>
+    <p class="cta-final-sub reveal">Sem pedir permissao.</p>
+    <a href="#" class="cta-final-btn reveal">ENTRAR</a>
+    <div class="cta-final-footer reveal">
+      <img src="../img/logo-app.png" alt="YAG">
+      <span>@yag_social</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SCRIPTS
+     ================================================================ -->
+<script>
+/* ---- Scroll Reveal (IntersectionObserver) ---- */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(el=>el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ---- FAQ Accordion ---- */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const item = this.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    // toggle clicked
+    if(!wasOpen){
+      item.classList.add('open');
+      this.setAttribute('aria-expanded','true');
+    }
+  });
+});
+</script>
+</body>
+</html>
