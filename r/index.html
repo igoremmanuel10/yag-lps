@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG Social — Conexoes reais. Sem filtros.</title>
+<meta name="description" content="A comunidade gay brasileira. 100% verificada. Feed, Radar, Chat, Busca. Sem download. R$ 69,90/mes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #000000;
+  --dark: #1a1a1a;
+  --white: #ffffff;
+  --gray: #999999;
+  --gray-light: #cccccc;
+  --gray-dark: #666666;
+  --yellow: #E8C840;
+  --yellow-hover: #f0d860;
+  --red: #E84040;
+  --green: #40C870;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── SPLIT GRID ── */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+.split--auto { min-height: auto; }
+.split--flip { direction: rtl; }
+.split--flip > * { direction: ltr; }
+
+.split__photo {
+  position: relative;
+  overflow: hidden;
+  min-height: 50vh;
+}
+.split__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.split__photo--overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1;
+}
+
+.split__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px;
+  background: var(--black);
+}
+
+/* ── TYPOGRAPHY ── */
+.headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.headline--yellow { color: var(--yellow); }
+.headline--sm {
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.subtext {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+
+.fine {
+  font-size: 0.85rem;
+  color: var(--gray-dark);
+  margin-top: 16px;
+  font-weight: 300;
+}
+
+/* ── CTA BUTTON ── */
+.cta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  padding: 18px 40px;
+  background: var(--yellow);
+  color: var(--black);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.cta:hover {
+  background: var(--yellow-hover);
+  transform: translateY(-2px);
+}
+
+/* ── LOGO ── */
+.logo { height: 40px; margin-bottom: 48px; }
+
+/* ── PROVA SOCIAL BAR ── */
+.proof-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding: 48px 32px;
+  background: var(--dark);
+}
+.proof-bar span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  color: var(--yellow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── PROBLEM LIST ── */
+.problem-list {
+  list-style: none;
+  margin-bottom: 32px;
+}
+.problem-list li {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--gray-light);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.problem-list li .x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(232,64,64,0.15);
+  color: var(--red);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── FEATURE BLOCKS ── */
+.feature-content {
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--black);
+}
+.feature-content .headline--sm { margin-bottom: 8px; }
+.feature-content .subtext { margin-bottom: 24px; }
+.feature-content .screenshot {
+  width: 140px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  margin-top: 16px;
+}
+
+/* ── COMPARE TABLE ── */
+.compare {
+  padding: 100px 32px;
+  background: var(--black);
+  text-align: center;
+}
+.compare .headline { margin-bottom: 56px; }
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.compare-col { padding: 0; }
+.compare-col--header {
+  padding: 24px 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+}
+.compare-col--header.them { background: rgba(255,255,255,0.03); color: var(--gray); }
+.compare-col--header.us { background: rgba(232,200,64,0.08); color: var(--yellow); }
+.compare-row {
+  display: contents;
+}
+.compare-cell {
+  padding: 16px 24px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.compare-cell.them { color: var(--gray-dark); background: rgba(255,255,255,0.01); }
+.compare-cell.us { color: var(--white); background: rgba(232,200,64,0.03); }
+.compare-cell .icon-x { color: var(--red); font-weight: 700; }
+.compare-cell .icon-check { color: var(--green); font-weight: 700; }
+
+/* ── PRICING ── */
+.pricing {
+  padding: 100px 32px;
+  background: var(--dark);
+  text-align: center;
+}
+.pricing .price-tag {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.pricing .price-period {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--gray);
+  margin-bottom: 40px;
+}
+.pricing-features {
+  list-style: none;
+  max-width: 400px;
+  margin: 0 auto 48px;
+  text-align: left;
+}
+.pricing-features li {
+  padding: 12px 0;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--gray-light);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pricing-features li .check {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+/* ── FAQ ── */
+.faq {
+  padding: 100px 32px;
+  background: var(--black);
+  max-width: 700px;
+  margin: 0 auto;
+}
+.faq .headline { text-align: center; margin-bottom: 56px; }
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: left;
+  padding: 24px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq-question:hover { color: var(--yellow); }
+.faq-question .arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: var(--gray-dark);
+}
+.faq-item.open .arrow { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-answer p {
+  padding: 0 0 24px;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--gray);
+}
+
+/* ── FOOTER CTA ── */
+.footer-split .split__content { text-align: left; }
+.footer-info {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-info .logo-sm { height: 28px; opacity: 0.5; }
+.footer-info span {
+  font-size: 0.85rem;
+  color: var(--gray-dark);
+  font-weight: 300;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .split--flip { direction: ltr; }
+  .split__photo { min-height: 55vh; }
+  .split__content { padding: 48px 28px; }
+  .feature-content { padding: 40px 28px; }
+  .proof-bar { gap: 20px; padding: 32px 20px; }
+  .proof-bar span { font-size: 0.75rem; }
+  .compare-grid { max-width: 100%; }
+  .compare-cell { padding: 14px 16px; font-size: 0.85rem; }
+  .faq { padding: 64px 24px; }
+  .feature-content .screenshot { width: 120px; }
+  .footer-info { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ━━━━━━━━ 1. HERO ━━━━━━━━ -->
+<section class="split" id="hero">
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1000&fit=crop" alt="Homem confiante olhando para a camera" loading="eager">
+  </div>
+  <div class="split__content">
+    <img src="../img/yag2.png" alt="YAG" class="logo reveal">
+    <h1 class="headline reveal reveal-delay-1">Conexoes reais.<br>Sem filtros.</h1>
+    <p class="subtext reveal reveal-delay-2">A comunidade gay brasileira.<br>100% verificada.</p>
+    <div class="reveal reveal-delay-3">
+      <a href="#preco" class="cta">Fazer parte — R$ 69,90/mes</a>
+      <p class="fine">Sem download. Cancele quando quiser.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 2. PROVA SOCIAL ━━━━━━━━ -->
+<div class="proof-bar">
+  <span class="reveal">100% verificado</span>
+  <span class="reveal reveal-delay-1">So assinantes</span>
+  <span class="reveal reveal-delay-2">Zero fakes</span>
+  <span class="reveal reveal-delay-3">Sem download</span>
+</div>
+
+<!-- ━━━━━━━━ 3. PROBLEMA ━━━━━━━━ -->
+<section class="split split--auto">
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&h=1000&fit=crop" alt="Homem olhando celular" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+  <div class="split__content">
+    <h2 class="headline headline--sm reveal">O mercado gay digital esta quebrado.</h2>
+    <ul class="problem-list reveal reveal-delay-1">
+      <li><span class="x">X</span>Bots e perfis falsos em todo lugar</li>
+      <li><span class="x">X</span>R$ 120/mes em apps que nao entregam</li>
+      <li><span class="x">X</span>Apps gringos que ignoram o Brasil</li>
+      <li><span class="x">X</span>Seus dados vendidos pra terceiros</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 4. SOLUCAO (invertido) ━━━━━━━━ -->
+<section class="split split--auto split--flip">
+  <div class="split__content">
+    <h2 class="headline headline--sm headline--yellow reveal">A gente construiu o nosso.</h2>
+    <p class="subtext reveal reveal-delay-1">Feed. Radar. Chat. Busca.<br>Todo mundo real.</p>
+  </div>
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=1000&fit=crop" alt="Amigos rindo juntos" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 5. FEATURES ━━━━━━━━ -->
+
+<!-- Radar -->
+<section class="split split--auto">
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=800&h=1000&fit=crop" alt="Homem rindo" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+  <div class="feature-content">
+    <h3 class="headline headline--sm reveal">Radar</h3>
+    <p class="subtext reveal reveal-delay-1">Quem ta perto. Ao vivo. Sem enrolacao.</p>
+    <img src="../screenshots/09_radar_mobile.png" alt="Screenshot do Radar" class="screenshot reveal reveal-delay-2" loading="lazy">
+  </div>
+</section>
+
+<!-- Feed (invertido) -->
+<section class="split split--auto split--flip">
+  <div class="feature-content">
+    <h3 class="headline headline--sm reveal">Feed</h3>
+    <p class="subtext reveal reveal-delay-1">Gente real. Historias reais. Conexoes reais.</p>
+    <img src="../screenshots/10_feed_mobile.png" alt="Screenshot do Feed" class="screenshot reveal reveal-delay-2" loading="lazy">
+  </div>
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop" alt="Homem com barba" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+</section>
+
+<!-- Chat -->
+<section class="split split--auto">
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=1000&fit=crop" alt="Cara jovem sorrindo" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+  <div class="feature-content">
+    <h3 class="headline headline--sm reveal">Chat</h3>
+    <p class="subtext reveal reveal-delay-1">Conversas reais. Sem bots. Sem ghosting.</p>
+    <img src="../screenshots/07_chat.png" alt="Screenshot do Chat" class="screenshot reveal reveal-delay-2" loading="lazy">
+  </div>
+</section>
+
+<!-- Perfil (invertido) -->
+<section class="split split--auto split--flip">
+  <div class="feature-content">
+    <h3 class="headline headline--sm reveal">Perfil</h3>
+    <p class="subtext reveal reveal-delay-1">Todo mundo mostra a cara. Verificado de verdade.</p>
+    <img src="../screenshots/12_profile_detail_mobile.png" alt="Screenshot do Perfil" class="screenshot reveal reveal-delay-2" loading="lazy">
+  </div>
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1000&fit=crop" alt="Homem confiante" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 6. COMPARATIVO ━━━━━━━━ -->
+<section class="compare">
+  <h2 class="headline reveal">Eles vs YAG</h2>
+  <div class="compare-grid reveal reveal-delay-1">
+    <div class="compare-col--header them">Outros apps</div>
+    <div class="compare-col--header us">YAG</div>
+
+    <div class="compare-cell them"><span class="icon-x">X</span> Perfis falsos e bots</div>
+    <div class="compare-cell us"><span class="icon-check">+</span> 100% verificado</div>
+
+    <div class="compare-cell them"><span class="icon-x">X</span> R$ 120+/mes</div>
+    <div class="compare-cell us"><span class="icon-check">+</span> R$ 69,90/mes</div>
+
+    <div class="compare-cell them"><span class="icon-x">X</span> Feito pros EUA</div>
+    <div class="compare-cell us"><span class="icon-check">+</span> Feito pro Brasil</div>
+
+    <div class="compare-cell them"><span class="icon-x">X</span> Vendem seus dados</div>
+    <div class="compare-cell us"><span class="icon-check">+</span> Privacidade real</div>
+
+    <div class="compare-cell them"><span class="icon-x">X</span> Precisa baixar app</div>
+    <div class="compare-cell us"><span class="icon-check">+</span> Acessa no navegador</div>
+
+    <div class="compare-cell them"><span class="icon-x">X</span> Free tier lotado de ads</div>
+    <div class="compare-cell us"><span class="icon-check">+</span> Zero anuncios</div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 7. MANIFESTO ━━━━━━━━ -->
+<section class="split split--auto">
+  <div class="split__photo split__photo--overlay">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=1000&fit=crop" alt="Amigos" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+  <div class="split__content">
+    <h2 class="headline headline--yellow reveal">A gente cansou.</h2>
+    <p class="subtext reveal reveal-delay-1" style="color:var(--white);font-size:1.15rem;">
+      Cansou de app gringo que nao entende a gente.<br>
+      Cansou de pagar caro pra conversar com bot.<br>
+      Cansou de plataforma que vende nossos dados.<br><br>
+      Aqui todo mundo e real.<br>
+      Isso e o YAG.
+    </p>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 8. PRECO ━━━━━━━━ -->
+<section class="pricing" id="preco">
+  <div class="reveal">
+    <div class="price-tag">R$ 69,90</div>
+    <div class="price-period">por mes</div>
+  </div>
+  <ul class="pricing-features reveal reveal-delay-1">
+    <li><span class="check">+</span> Feed, Radar, Chat e Busca</li>
+    <li><span class="check">+</span> Perfil verificado</li>
+    <li><span class="check">+</span> Sem anuncios, sem bots</li>
+    <li><span class="check">+</span> Acesso pelo navegador</li>
+    <li><span class="check">+</span> Cancele quando quiser</li>
+    <li><span class="check">+</span> Suporte humano real</li>
+  </ul>
+  <div class="reveal reveal-delay-2">
+    <a href="#" class="cta">Fazer parte agora</a>
+    <p class="fine">Sem contrato. Sem surpresas.</p>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 9. FAQ ━━━━━━━━ -->
+<section class="faq">
+  <h2 class="headline headline--sm reveal" style="text-align:center;">Perguntas frequentes</h2>
+
+  <div class="faq-item reveal">
+    <button class="faq-question">Preciso baixar algum app?<span class="arrow">+</span></button>
+    <div class="faq-answer"><p>Nao. O YAG funciona direto no navegador do celular ou computador. Sem download, sem Play Store, sem App Store. Abre e usa.</p></div>
+  </div>
+
+  <div class="faq-item reveal reveal-delay-1">
+    <button class="faq-question">Como funciona a verificacao?<span class="arrow">+</span></button>
+    <div class="faq-answer"><p>Todo perfil passa por verificacao com foto em tempo real. Sem foto verificada, nao entra. Isso garante que todo mundo que voce ve no YAG e real.</p></div>
+  </div>
+
+  <div class="faq-item reveal reveal-delay-1">
+    <button class="faq-question">Posso cancelar quando quiser?<span class="arrow">+</span></button>
+    <div class="faq-answer"><p>Sim. Sem contrato, sem fidelidade, sem multa. Voce cancela em dois cliques na sua conta e pronto.</p></div>
+  </div>
+
+  <div class="faq-item reveal reveal-delay-2">
+    <button class="faq-question">Meus dados estao seguros?<span class="arrow">+</span></button>
+    <div class="faq-answer"><p>Seus dados sao seus. A gente nao vende, nao compartilha e nao usa pra anuncio. Servidores no Brasil com criptografia de ponta a ponta.</p></div>
+  </div>
+
+  <div class="faq-item reveal reveal-delay-2">
+    <button class="faq-question">O YAG e so pra relacionamento?<span class="arrow">+</span></button>
+    <div class="faq-answer"><p>Nao. O YAG e uma comunidade. Tem gente buscando amizade, conexao, networking, rolezinho e, sim, relacionamento tambem. Voce decide o que faz sentido pra voce.</p></div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ 10. CTA FINAL ━━━━━━━━ -->
+<section class="split split--auto footer-split">
+  <div class="split__photo">
+    <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=800&h=1000&fit=crop" alt="Homem sorrindo" loading="lazy" style="min-height:100%;position:relative;">
+  </div>
+  <div class="split__content">
+    <h2 class="headline reveal">Seu lugar.<br>Sem pedir permissao.</h2>
+    <div class="reveal reveal-delay-1">
+      <a href="#" class="cta">Entrar no YAG</a>
+    </div>
+    <div class="footer-info reveal reveal-delay-2">
+      <img src="../img/yag2.png" alt="YAG" class="logo-sm">
+      <span>@yag_social</span>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━ SCRIPTS ━━━━━━━━ -->
+<script>
+// Scroll Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    // Open clicked (if was closed)
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

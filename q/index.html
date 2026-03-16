@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG Social — A Noite</title>
+<meta name="description" content="A comunidade gay brasileira. Do YAG pro bar. Do bar pra vida real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #F2A900;
+  --gold-light: #FFD166;
+  --gold-dim: #C48A00;
+  --black: #000000;
+  --surface: #1a1a1a;
+  --white: #ffffff;
+  --gray: #999999;
+  --gray-light: #cccccc;
+  --red: #E53935;
+  --green: #43A047;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: var(--font-body); }
+
+/* --- REVEAL ANIMATION --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+/* --- CTA BUTTON --- */
+.cta-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 40px;
+  border-radius: 60px;
+  letter-spacing: -0.01em;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 30px rgba(242, 169, 0, 0.25);
+}
+.cta-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(242, 169, 0, 0.4);
+}
+
+/* ========================
+   1. HERO
+   ======================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.3) 40%,
+    rgba(0,0,0,0.75) 75%,
+    rgba(0,0,0,0.92) 100%
+  );
+}
+
+.hero-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+.hero-nav.scrolled {
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.hero-nav .logo img { height: 40px; }
+.hero-nav .nav-enter {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 10px 24px;
+  border-radius: 40px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  background: transparent;
+}
+.hero-nav .nav-enter:hover {
+  border-color: var(--gold);
+  background: rgba(242, 169, 0, 0.08);
+  color: var(--gold);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 40px 80px;
+  max-width: 800px;
+}
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.hero-content p {
+  font-weight: 300;
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 36px;
+  letter-spacing: 0.01em;
+}
+.hero-content .cta-btn { font-size: 15px; padding: 16px 36px; }
+
+/* ========================
+   2. BARRA
+   ======================== */
+.barra {
+  background: var(--surface);
+  padding: 20px 40px;
+  text-align: center;
+  border-top: 1px solid rgba(242,169,0,0.15);
+  border-bottom: 1px solid rgba(242,169,0,0.15);
+}
+.barra p {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.barra span {
+  display: inline-block;
+  margin: 0 12px;
+  opacity: 0.35;
+}
+
+/* ========================
+   3. PROBLEMA
+   ======================== */
+.problema {
+  background: var(--black);
+  padding: 100px 40px;
+}
+.problema-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+.problema-img {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.problema-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  filter: brightness(0.8) saturate(0.9);
+}
+.problema-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(242,169,0,0.08) 0%, transparent 60%);
+  border-radius: 20px;
+}
+.problema-text h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.problema-text > p {
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.problema-bullets { list-style: none; }
+.problema-bullets li {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray-light);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.problema-bullets li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 2px;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}
+
+/* ========================
+   4. SOLUCAO
+   ======================== */
+.solucao {
+  position: relative;
+  padding: 120px 40px;
+  text-align: center;
+  overflow: hidden;
+}
+.solucao-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.solucao-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.solucao-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+}
+.solucao-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.solucao-content h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.solucao-content > p {
+  font-weight: 300;
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+  margin-bottom: 60px;
+}
+.solucao-phone {
+  position: relative;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.solucao-phone::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at center, rgba(242,169,0,0.15) 0%, transparent 70%);
+  border-radius: 40px;
+  z-index: -1;
+}
+.solucao-phone img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(242,169,0,0.1);
+}
+
+/* ========================
+   5. FEATURES
+   ======================== */
+.features {
+  background: var(--black);
+  padding: 100px 40px;
+}
+.features-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.feature-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+.feature-block:last-child { margin-bottom: 0; }
+.feature-block.reversed .feature-visual { order: 2; }
+.feature-block.reversed .feature-text { order: 1; }
+
+.feature-visual {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.feature-visual .photo {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.feature-visual .photo img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  filter: brightness(0.85) saturate(0.9);
+}
+.feature-visual .screenshot {
+  flex: 0 0 140px;
+}
+.feature-visual .screenshot img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+}
+
+.feature-text h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.feature-text h3 span {
+  color: var(--gold);
+}
+.feature-text .feature-dash {
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 16px 0;
+}
+.feature-text p {
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--gray);
+  line-height: 1.65;
+}
+
+/* ========================
+   6. COMPARATIVO
+   ======================== */
+.comparativo {
+  background: var(--surface);
+  padding: 100px 40px;
+}
+.comparativo-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.comparativo h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: -0.02em;
+}
+.comparativo h2 span { color: var(--gold); }
+
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.comp-table thead th {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+}
+.comp-table thead th:nth-child(2) { color: var(--gray); }
+.comp-table thead th:nth-child(3) { color: var(--gold); }
+
+.comp-table tbody td {
+  font-weight: 400;
+  font-size: 15px;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  vertical-align: middle;
+}
+.comp-table tbody td:first-child {
+  color: var(--gray-light);
+  font-weight: 300;
+}
+.comp-table tbody td:nth-child(2) { color: var(--gray); }
+.comp-table tbody td:nth-child(3) { color: var(--white); }
+
+.comp-x {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--red);
+  font-weight: 600;
+  font-size: 14px;
+}
+.comp-check {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--green);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* ========================
+   7. MANIFESTO
+   ======================== */
+.manifesto {
+  position: relative;
+  padding: 140px 40px;
+  text-align: center;
+  overflow: hidden;
+}
+.manifesto-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.manifesto-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.manifesto-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.68);
+}
+.manifesto-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.manifesto-content .line-1 {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 22px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.manifesto-content .line-2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 52px;
+  color: var(--gold);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.manifesto-content .line-3 {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+/* ========================
+   8. PRECO
+   ======================== */
+.preco {
+  background: var(--black);
+  padding: 100px 40px;
+  text-align: center;
+}
+.preco-card {
+  max-width: 480px;
+  margin: 0 auto;
+  border: 1px solid var(--gold);
+  border-radius: 28px;
+  padding: 56px 48px;
+  background: linear-gradient(145deg, rgba(242,169,0,0.04) 0%, rgba(0,0,0,0) 60%);
+  position: relative;
+  overflow: hidden;
+}
+.preco-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 0 0 4px 4px;
+}
+.preco-card .price {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 56px;
+  color: var(--white);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.preco-card .price span {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--gray);
+  letter-spacing: 0;
+}
+.preco-card .price-sub {
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--gray);
+  margin-top: 8px;
+  margin-bottom: 36px;
+}
+.preco-list {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 40px;
+}
+.preco-list li {
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--gray-light);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.preco-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ========================
+   9. FAQ
+   ======================== */
+.faq {
+  background: var(--surface);
+  padding: 100px 40px;
+}
+.faq-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.faq h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: -0.02em;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  text-align: left;
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  transition: color 0.3s ease;
+}
+.faq-question:hover { color: var(--gold); }
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-icon::before, .faq-icon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  border-radius: 1px;
+  transition: opacity 0.35s ease;
+}
+.faq-icon::before {
+  width: 16px;
+  height: 1.5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.faq-icon::after {
+  width: 1.5px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), padding 0.45s ease;
+}
+.faq-answer-inner {
+  padding: 0 0 24px;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* ========================
+   10. CTA FINAL
+   ======================== */
+.cta-final {
+  position: relative;
+  padding: 120px 40px;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-final-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.cta-final-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cta-final-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+}
+.cta-final-content {
+  position: relative;
+  z-index: 2;
+}
+.cta-final-content h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+}
+.cta-final-content .cta-btn { margin-bottom: 48px; }
+.cta-final-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+}
+.cta-final-footer img { height: 32px; opacity: 0.5; }
+.cta-final-footer span {
+  font-weight: 300;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 768px) {
+  .hero-nav { padding: 16px 20px; }
+  .hero-content {
+    padding: 0 24px 60px;
+  }
+  .hero-content h1 { font-size: 34px; }
+  .hero-content p { font-size: 16px; }
+
+  .barra p { font-size: 11px; }
+  .barra span { margin: 0 6px; }
+
+  .problema { padding: 70px 24px; }
+  .problema-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .problema-img { max-width: 320px; }
+  .problema-text h2 { font-size: 30px; }
+
+  .solucao { padding: 80px 24px; }
+  .solucao-content h2 { font-size: 32px; }
+  .solucao-phone { max-width: 220px; }
+
+  .features { padding: 70px 24px; }
+  .feature-block {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .feature-block.reversed .feature-visual { order: 0; }
+  .feature-block.reversed .feature-text { order: 0; }
+  .feature-text h3 { font-size: 28px; }
+  .feature-visual .screenshot { flex: 0 0 100px; }
+
+  .comparativo { padding: 70px 20px; }
+  .comparativo h2 { font-size: 30px; }
+  .comp-table thead th,
+  .comp-table tbody td { padding: 12px 14px; font-size: 13px; }
+
+  .manifesto { padding: 90px 24px; }
+  .manifesto-content .line-1 { font-size: 17px; }
+  .manifesto-content .line-2 { font-size: 34px; }
+  .manifesto-content .line-3 { font-size: 20px; }
+
+  .preco { padding: 70px 24px; }
+  .preco-card { padding: 40px 28px; }
+  .preco-card .price { font-size: 44px; }
+
+  .faq { padding: 70px 24px; }
+  .faq h2 { font-size: 28px; }
+
+  .cta-final { padding: 80px 24px; }
+  .cta-final-content h2 { font-size: 30px; }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 { font-size: 28px; }
+  .cta-btn { font-size: 14px; padding: 15px 30px; }
+  .feature-visual { flex-direction: column; }
+  .feature-visual .screenshot { flex: 0 0 auto; max-width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======================== NAV ======================== -->
+<nav class="hero-nav" id="mainNav">
+  <a href="#" class="logo">
+    <img src="../img/yag2.png" alt="YAG" style="height:40px">
+  </a>
+  <a href="#" class="nav-enter">Entrar</a>
+</nav>
+
+<!-- ======================== 1. HERO ======================== -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&h=900&fit=crop" alt="Amigos rindo juntos" loading="eager">
+  </div>
+  <div class="hero-content">
+    <h1 class="reveal">Do YAG pro bar.<br>Do bar pra vida real.</h1>
+    <p class="reveal reveal-delay-1">A comunidade gay brasileira.</p>
+    <a href="#preco" class="cta-btn reveal reveal-delay-2">Fazer parte &mdash; R$ 69,90/m&ecirc;s</a>
+  </div>
+</section>
+
+<!-- ======================== 2. BARRA ======================== -->
+<section class="barra">
+  <p>100% verificado <span>|</span> S&oacute; assinantes <span>|</span> Zero fakes <span>|</span> Sem download</p>
+</section>
+
+<!-- ======================== 3. PROBLEMA ======================== -->
+<section class="problema">
+  <div class="problema-inner">
+    <div class="problema-img reveal">
+      <img src="https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&h=1000&fit=crop" alt="Cara olhando celular">
+    </div>
+    <div class="problema-text">
+      <h2 class="reveal">Cansou de tela<br>sem alma?</h2>
+      <p class="reveal reveal-delay-1">Bots. Fakes. R$ 120/m&ecirc;s. Apps que n&atilde;o entendem o Brasil.</p>
+      <ul class="problema-bullets">
+        <li class="reveal reveal-delay-1">Perfis falsos que nunca respondem</li>
+        <li class="reveal reveal-delay-2">Assinaturas caras com recursos travados</li>
+        <li class="reveal reveal-delay-3">Algoritmos que escondem quem t&aacute; perto</li>
+        <li class="reveal reveal-delay-4">Zero comunidade, 100% solid&atilde;o</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== 4. SOLUCAO ======================== -->
+<section class="solucao">
+  <div class="solucao-bg">
+    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1400&h=800&fit=crop" alt="Bar noturno" loading="lazy">
+  </div>
+  <div class="solucao-content">
+    <h2 class="reveal">A gente construiu o nosso.</h2>
+    <p class="reveal reveal-delay-1">Feed pra se expressar. Radar pra saber quem t&aacute; perto. Chat de verdade.</p>
+    <div class="solucao-phone reveal reveal-delay-2">
+      <img src="../screenshots/10_feed_mobile.png" alt="YAG Feed">
+    </div>
+  </div>
+</section>
+
+<!-- ======================== 5. FEATURES ======================== -->
+<section class="features">
+  <div class="features-inner">
+
+    <!-- Feature 1: Radar -->
+    <div class="feature-block">
+      <div class="feature-visual reveal">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=600&h=600&fit=crop" alt="Cara rindo">
+        </div>
+        <div class="screenshot">
+          <img src="../screenshots/09_radar_mobile.png" alt="YAG Radar">
+        </div>
+      </div>
+      <div class="feature-text">
+        <h3 class="reveal"><span>Radar</span></h3>
+        <div class="feature-dash reveal reveal-delay-1"></div>
+        <p class="reveal reveal-delay-1">Quem t&aacute; perto. De verdade. Sem algoritmo escondendo gente, sem filtro de quem paga mais. Se o cara t&aacute; a 200 metros, voc&ecirc; vai saber.</p>
+      </div>
+    </div>
+
+    <!-- Feature 2: Feed -->
+    <div class="feature-block reversed">
+      <div class="feature-visual reveal">
+        <div class="screenshot">
+          <img src="../screenshots/10_feed_mobile.png" alt="YAG Feed">
+        </div>
+      </div>
+      <div class="feature-text">
+        <h3 class="reveal"><span>Feed</span></h3>
+        <div class="feature-dash reveal reveal-delay-1"></div>
+        <p class="reveal reveal-delay-1">Gente real. Posts reais. Aqui n&atilde;o tem timeline manipulada. Todo mundo aparece, todo mundo existe. Como deveria ser desde o come&ccedil;o.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================== 6. COMPARATIVO ======================== -->
+<section class="comparativo">
+  <div class="comparativo-inner">
+    <h2 class="reveal">Eles vs <span>YAG</span></h2>
+    <table class="comp-table reveal reveal-delay-1">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Apps tradicionais</th>
+          <th>YAG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Perfis verificados</td>
+          <td><span class="comp-x">x</span> Opcional</td>
+          <td><span class="comp-check">&#10003;</span> 100% obrigat&oacute;rio</td>
+        </tr>
+        <tr>
+          <td>Bots e fakes</td>
+          <td><span class="comp-x">x</span> Cheio</td>
+          <td><span class="comp-check">&#10003;</span> Zero</td>
+        </tr>
+        <tr>
+          <td>Feed social</td>
+          <td><span class="comp-x">x</span> N&atilde;o tem</td>
+          <td><span class="comp-check">&#10003;</span> Completo</td>
+        </tr>
+        <tr>
+          <td>Pre&ccedil;o</td>
+          <td><span class="comp-x">x</span> R$ 90&ndash;150/m&ecirc;s</td>
+          <td><span class="comp-check">&#10003;</span> R$ 69,90/m&ecirc;s</td>
+        </tr>
+        <tr>
+          <td>Precisa baixar app</td>
+          <td><span class="comp-x">x</span> Sim</td>
+          <td><span class="comp-check">&#10003;</span> Navegador</td>
+        </tr>
+        <tr>
+          <td>Feito no Brasil</td>
+          <td><span class="comp-x">x</span> N&atilde;o</td>
+          <td><span class="comp-check">&#10003;</span> 100%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======================== 7. MANIFESTO ======================== -->
+<section class="manifesto">
+  <div class="manifesto-bg">
+    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1400&h=800&fit=crop" alt="Bar noturno" loading="lazy">
+  </div>
+  <div class="manifesto-content">
+    <p class="line-1 reveal">A gente sempre precisou se esconder.<br>Provar que merecia estar l&aacute;.<br>Pedir permiss&atilde;o pra existir.</p>
+    <p class="line-2 reveal reveal-delay-1">A gente cansou.</p>
+    <p class="line-3 reveal reveal-delay-2">Aqui todo mundo &eacute; real.</p>
+  </div>
+</section>
+
+<!-- ======================== 8. PRECO ======================== -->
+<section class="preco" id="preco">
+  <div class="preco-card reveal">
+    <div class="price">R$ 69,90 <span>/m&ecirc;s</span></div>
+    <p class="price-sub">Menos que uma noite fora.</p>
+    <ul class="preco-list">
+      <li>Perfil verificado e completo</li>
+      <li>Radar ilimitado</li>
+      <li>Feed social sem algoritmo</li>
+      <li>Chat direto, sem limite</li>
+      <li>Busca avan&ccedil;ada por filtros</li>
+      <li>Acesso via navegador, sem app</li>
+      <li>Comunidade 100% real</li>
+    </ul>
+    <a href="#" class="cta-btn">Fazer parte agora</a>
+  </div>
+</section>
+
+<!-- ======================== 9. FAQ ======================== -->
+<section class="faq">
+  <div class="faq-inner">
+    <h2 class="reveal">Perguntas frequentes</h2>
+
+    <div class="faq-item reveal">
+      <button class="faq-question" aria-expanded="false">
+        <span>Preciso baixar algum app?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">N&atilde;o. O YAG funciona direto no navegador do celular ou computador. Sem download, sem espa&ccedil;o ocupado, sem rastro na loja de apps. Acessa e pronto.</div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-1">
+      <button class="faq-question" aria-expanded="false">
+        <span>Como funciona a verifica&ccedil;&atilde;o de perfil?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">Todo mundo que entra no YAG passa por verifica&ccedil;&atilde;o com selfie em tempo real. Sem isso, n&atilde;o cria conta. &Eacute; assim que garantimos zero fakes e zero bots.</div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-2">
+      <button class="faq-question" aria-expanded="false">
+        <span>Posso cancelar quando quiser?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">Sim. Sem fidelidade, sem multa, sem letra miúda. Cancela direto na sua conta quando quiser. Mas a gente aposta que voc&ecirc; vai querer ficar.</div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-3">
+      <button class="faq-question" aria-expanded="false">
+        <span>O Radar mostra quem t&aacute; perto de mim?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">Sim. O Radar usa localiza&ccedil;&atilde;o em tempo real pra mostrar quem t&aacute; por perto. Sem filtro de quem paga mais, sem algoritmo escondendo gente. Todo assinante tem o mesmo acesso.</div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal reveal-delay-4">
+      <button class="faq-question" aria-expanded="false">
+        <span>Meus dados ficam seguros?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">100%. Usamos criptografia ponta a ponta no chat e seguimos a LGPD. Sua localiza&ccedil;&atilde;o s&oacute; aparece no Radar quando voc&ecirc; quer. Privacidade n&atilde;o &eacute; feature aqui, &eacute; fundamento.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================== 10. CTA FINAL ======================== -->
+<section class="cta-final">
+  <div class="cta-final-bg">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop" alt="Grupo de amigos" loading="lazy">
+  </div>
+  <div class="cta-final-content">
+    <h2 class="reveal">Seu lugar.<br>Sem pedir permiss&atilde;o.</h2>
+    <a href="#preco" class="cta-btn reveal reveal-delay-1">Fazer parte &mdash; R$ 69,90/m&ecirc;s</a>
+    <div class="cta-final-footer reveal reveal-delay-2">
+      <img src="../img/yag2.png" alt="YAG">
+      <span>@yag_social</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== JAVASCRIPT ======================== -->
+<script>
+// Scroll reveal
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+
+// Nav scroll effect
+(function() {
+  const nav = document.getElementById('mainNav');
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
+
+// FAQ accordion
+(function() {
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(item) {
+    var btn = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+    btn.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+      // Close all
+      items.forEach(function(other) {
+        other.classList.remove('open');
+        other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        other.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
