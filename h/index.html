@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAG Social — Gente Real. Conexoes Reais.</title>
+  <meta name="description" content="YAG e a rede social gay brasileira feita pra gente real. Sem download, direto no navegador. R$ 69,90/mes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #000000;
+      --dark: #0a0a0a;
+      --gray-dark: #1a1a1a;
+      --gray: #888888;
+      --gray-light: #333333;
+      --yellow: #f8b506;
+      --yellow-dark: #d49e05;
+      --white: #ffffff;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(
+        135deg,
+        #000000 0%,
+        #1a1a1a 25%,
+        #0d0d0d 50%,
+        #1a1a1a 75%,
+        #000000 100%
+      );
+      background-size: 400% 400%;
+      animation: heroGradient 12s ease infinite;
+    }
+
+    @keyframes heroGradient {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 0%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Noise texture overlay */
+    .hero__bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    .hero__nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 32px;
+    }
+
+    .hero__logo img {
+      height: 40px;
+      display: block;
+    }
+
+    .hero__nav-link {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      transition: color 0.3s ease;
+    }
+
+    .hero__nav-link:hover {
+      color: var(--white);
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px 80px;
+    }
+
+    .hero__headline {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: clamp(36px, 8vw, 72px);
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .hero__headline--accent {
+      color: var(--yellow);
+      margin-bottom: 32px;
+    }
+
+    .hero__sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 48px;
+      letter-spacing: 0.02em;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      padding: 18px 48px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--yellow {
+      background: var(--yellow);
+      color: var(--black);
+      box-shadow: 0 0 0 rgba(248, 181, 6, 0);
+    }
+
+    .btn--yellow:hover {
+      box-shadow: 0 8px 32px rgba(248, 181, 6, 0.25);
+    }
+
+    .btn--black {
+      background: var(--black);
+      color: var(--white);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .btn--black:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gray), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    /* =========================================
+       SECTION: SEM DOWNLOAD
+    ========================================= */
+
+    .section {
+      padding: 120px 24px;
+    }
+
+    .section--dark {
+      background: var(--dark);
+    }
+
+    .section--black {
+      background: var(--black);
+    }
+
+    .section--yellow {
+      background: var(--yellow);
+    }
+
+    .section__inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .no-download__headline {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: clamp(22px, 4vw, 36px);
+      line-height: 1.3;
+      color: var(--white);
+      max-width: 720px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    .no-download__headline span {
+      color: var(--yellow);
+    }
+
+    .mockup {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .mockup__device {
+      border: 1px solid var(--gray-light);
+      border-radius: 12px;
+      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mockup__device::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(248, 181, 6, 0.3), transparent);
+    }
+
+    .mockup__device--mobile {
+      width: 120px;
+      height: 220px;
+      border-radius: 16px;
+    }
+
+    .mockup__device--desktop {
+      width: 320px;
+      height: 200px;
+      border-radius: 8px;
+    }
+
+    .mockup__device-label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    .no-download__text {
+      text-align: center;
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       SECTION: COMPARATIVO
+    ========================================= */
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .compare__col {
+      padding: 48px 32px;
+    }
+
+    .compare__col--la {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .compare__col--aqui {
+      background: rgba(248, 181, 6, 0.06);
+      border-radius: 0 8px 8px 0;
+      border-left: 2px solid var(--yellow);
+    }
+
+    .compare__label {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .compare__col--la .compare__label {
+      color: var(--gray);
+    }
+
+    .compare__col--aqui .compare__label {
+      color: var(--yellow);
+    }
+
+    .compare__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .compare__item {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .compare__col--la .compare__item {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .compare__col--aqui .compare__item {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    /* =========================================
+       SECTION: MANIFESTO
+    ========================================= */
+
+    .manifesto__text {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(18px, 3vw, 22px);
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .manifesto__text strong {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    /* =========================================
+       SECTION: CTA FINAL
+    ========================================= */
+
+    .cta-final {
+      text-align: center;
+    }
+
+    .cta-final__headline {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: clamp(24px, 5vw, 40px);
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 40px;
+      letter-spacing: 0.04em;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .footer {
+      background: var(--black);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray);
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* =========================================
+       ANIMATIONS (Scroll reveal)
+    ========================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 640px) {
+      .hero__nav {
+        padding: 20px 20px;
+      }
+
+      .hero__content {
+        padding: 0 20px 60px;
+      }
+
+      .hero__sub {
+        margin-bottom: 36px;
+      }
+
+      .btn {
+        padding: 16px 36px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 320px;
+        text-align: center;
+      }
+
+      .section {
+        padding: 80px 20px;
+      }
+
+      .mockup {
+        gap: 16px;
+      }
+
+      .mockup__device--mobile {
+        width: 90px;
+        height: 170px;
+      }
+
+      .mockup__device--desktop {
+        width: 220px;
+        height: 140px;
+      }
+
+      .compare {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .compare__col--la {
+        border-radius: 8px 8px 0 0;
+      }
+
+      .compare__col--aqui {
+        border-radius: 0 0 8px 8px;
+        border-left: none;
+        border-top: 2px solid var(--yellow);
+      }
+
+      .compare__col {
+        padding: 36px 24px;
+      }
+
+      .cta-final__headline {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+
+    <nav class="hero__nav">
+      <a href="/" class="hero__logo">
+        <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+      </a>
+      <a href="#cta" class="hero__nav-link">Entrar</a>
+    </nav>
+
+    <div class="hero__content">
+      <h1 class="hero__headline">GENTE REAL.</h1>
+      <h2 class="hero__headline hero__headline--accent">CONEXOES REAIS.</h2>
+      <p class="hero__sub">Sem download. Acessa no navegador.</p>
+      <a href="#cta" class="btn btn--yellow">Entrar — R$ 69,90/mes</a>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===== SEM DOWNLOAD ===== -->
+  <section class="section section--dark">
+    <div class="section__inner">
+      <h3 class="no-download__headline reveal">
+        O Grindr cobra R$ 120/mes pelo acesso web.<br>
+        No <span>YAG</span>, e padrao.
+      </h3>
+
+      <div class="mockup reveal">
+        <div class="mockup__device mockup__device--mobile">
+          <span class="mockup__device-label">Mobile</span>
+        </div>
+        <div class="mockup__device mockup__device--desktop">
+          <span class="mockup__device-label">Desktop</span>
+        </div>
+      </div>
+
+      <p class="no-download__text reveal">
+        Funciona em qualquer tela. Chrome, Safari, qualquer navegador.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== COMPARATIVO ===== -->
+  <section class="section section--black">
+    <div class="section__inner">
+      <div class="compare reveal">
+        <div class="compare__col compare__col--la">
+          <div class="compare__label">La</div>
+          <ul class="compare__list">
+            <li class="compare__item">Grid de foto sem alma</li>
+            <li class="compare__item">R$ 120/mes</li>
+            <li class="compare__item">Cheio de bots</li>
+            <li class="compare__item">Seus dados vendidos</li>
+          </ul>
+        </div>
+        <div class="compare__col compare__col--aqui">
+          <div class="compare__label">Aqui</div>
+          <ul class="compare__list">
+            <li class="compare__item">Feed com gente real</li>
+            <li class="compare__item">R$ 69,90/mes</li>
+            <li class="compare__item">100% verificado</li>
+            <li class="compare__item">Privacidade de verdade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MANIFESTO ===== -->
+  <section class="section section--black">
+    <div class="section__inner">
+      <p class="manifesto__text reveal">
+        O gay brasileiro nunca teve um lugar digital que fosse dele. Criaram apps gringos, frios, cheios de fake. <strong>A gente cansou.</strong> O YAG e a comunidade onde todo mundo e real.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section id="cta" class="section section--yellow">
+    <div class="section__inner cta-final">
+      <h3 class="cta-final__headline reveal">
+        Rebeldes por fora,<br>intimos por dentro.
+      </h3>
+      <a href="#" class="btn btn--black reveal">Fazer parte</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    YAG Social — 2026
+  </footer>
+
+  <!-- Scroll Reveal -->
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      els.forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>

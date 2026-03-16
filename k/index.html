@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG — Rede Social Gay Brasileira</title>
+<meta name="description" content="Comunidade gay brasileira. 100% verificada. Sem fakes, sem bots.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #000000;
+  --black-soft: #0a0a0a;
+  --yellow: #f8b506;
+  --white: #ffffff;
+  --muted: #555555;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ========== HERO ========== */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 24px;
+}
+
+.hero-logo {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-logo img {
+  height: 40px;
+  display: block;
+}
+
+.hero-content {
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(32px, 7vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 40px;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  background: var(--yellow);
+  border: none;
+  padding: 16px 40px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(248, 181, 6, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.hero-fine-print {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ========== SECTION: VERIFICADO ========== */
+.section-verified {
+  background: var(--black-soft);
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.section-verified h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.3;
+  color: var(--white);
+  margin-bottom: 64px;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 8vw, 64px);
+  color: var(--yellow);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ========== SECTION: FEED BLUR ========== */
+.section-feed {
+  background: var(--black);
+  padding: 120px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.feed-simulation {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.feed-item {
+  border-radius: 8px;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.feed-item-1 {
+  height: 200px;
+  background: linear-gradient(135deg, #2a1f0a 0%, #1a1205 100%);
+}
+
+.feed-item-2 {
+  height: 80px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+}
+
+.feed-item-3 {
+  height: 160px;
+  background: linear-gradient(135deg, #1e0f0a 0%, #120a05 100%);
+}
+
+.feed-item-4 {
+  height: 120px;
+  background: linear-gradient(135deg, #0a1a1e 0%, #050f12 100%);
+}
+
+.feed-item-5 {
+  height: 180px;
+  background: linear-gradient(135deg, #1a0a1e 0%, #0f0512 100%);
+}
+
+.feed-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  padding: 24px;
+}
+
+.feed-overlay h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 28px);
+  line-height: 1.3;
+  color: var(--white);
+  margin-bottom: 32px;
+  max-width: 360px;
+}
+
+/* ========== SECTION: RADAR ========== */
+.section-radar {
+  background: var(--black-soft);
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.radar-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 4vw, 28px);
+  line-height: 1.4;
+  color: var(--white);
+  margin-bottom: 64px;
+}
+
+.radar-count span {
+  color: var(--yellow);
+  font-size: clamp(48px, 10vw, 80px);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+}
+
+.radar-area {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  margin: 0 auto 48px;
+}
+
+.radar-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--yellow);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.radar-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--yellow);
+  opacity: 0;
+  animation: ripple 2s ease-out infinite;
+}
+
+.radar-dot:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
+.radar-dot:nth-child(1)::after { animation-delay: 0s; }
+.radar-dot:nth-child(2) { top: 60%; left: 75%; animation-delay: 0.4s; }
+.radar-dot:nth-child(2)::after { animation-delay: 0.4s; }
+.radar-dot:nth-child(3) { top: 35%; left: 55%; animation-delay: 0.8s; }
+.radar-dot:nth-child(3)::after { animation-delay: 0.8s; }
+.radar-dot:nth-child(4) { top: 80%; left: 30%; animation-delay: 1.2s; }
+.radar-dot:nth-child(4)::after { animation-delay: 1.2s; }
+.radar-dot:nth-child(5) { top: 25%; left: 85%; animation-delay: 0.6s; }
+.radar-dot:nth-child(5)::after { animation-delay: 0.6s; }
+.radar-dot:nth-child(6) { top: 70%; left: 48%; animation-delay: 1.0s; }
+.radar-dot:nth-child(6)::after { animation-delay: 1.0s; }
+
+.radar-description {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 320px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ========== SECTION: CTA FINAL ========== */
+.section-cta {
+  background: var(--black);
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.section-cta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 1.35;
+  color: var(--white);
+  max-width: 540px;
+  margin: 0 auto 48px;
+}
+
+.section-cta .btn-primary {
+  margin-bottom: 48px;
+}
+
+.footer-logo img {
+  height: 32px;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.footer-handle {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .hero {
+    padding: 0 20px;
+  }
+
+  .hero-headline {
+    margin-bottom: 32px;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+
+  .stats-row {
+    gap: 40px;
+  }
+
+  .section-verified,
+  .section-feed,
+  .section-radar,
+  .section-cta {
+    padding: 80px 20px;
+  }
+
+  .radar-area {
+    height: 220px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo">
+    <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-headline">Quer ver o que tem dentro?</h1>
+    <a href="#" class="btn-primary">Entrar — R$ 69,90/mes</a>
+    <p class="hero-fine-print">Cancele quando quiser.</p>
+  </div>
+</section>
+
+<!-- VERIFICADO -->
+<section class="section-verified">
+  <div class="reveal">
+    <h2>100% verificado. So gente real.</h2>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">fakes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">bots</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">real</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEED BLUR -->
+<section class="section-feed">
+  <div class="feed-simulation reveal">
+    <div class="feed-item feed-item-1"></div>
+    <div class="feed-item feed-item-2"></div>
+    <div class="feed-item feed-item-3"></div>
+    <div class="feed-item feed-item-4"></div>
+    <div class="feed-item feed-item-5"></div>
+    <div class="feed-overlay">
+      <h2>Isso ta acontecendo agora. Entra pra ver.</h2>
+      <a href="#" class="btn-primary">Fazer parte</a>
+    </div>
+  </div>
+</section>
+
+<!-- RADAR -->
+<section class="section-radar">
+  <div class="reveal">
+    <p class="radar-count">
+      <span>47</span>
+      pessoas perto de voce agora.
+    </p>
+    <div class="radar-area">
+      <div class="radar-dot"></div>
+      <div class="radar-dot"></div>
+      <div class="radar-dot"></div>
+      <div class="radar-dot"></div>
+      <div class="radar-dot"></div>
+      <div class="radar-dot"></div>
+    </div>
+    <p class="radar-description">Radar mostra quem e real e quem ta perto.</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section-cta">
+  <div class="reveal">
+    <h2>Comunidade gay brasileira. Feita por quem vive, nao por quem monetiza.</h2>
+    <a href="#" class="btn-primary">Entrar</a>
+    <div class="footer-logo">
+      <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+    </div>
+    <p class="footer-handle">@yag_social</p>
+  </div>
+</section>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+reveals.forEach(el => observer.observe(el));
+
+// Randomize radar number on load
+const radarNum = document.querySelector('.radar-count span');
+radarNum.textContent = Math.floor(Math.random() * 60) + 20;
+</script>
+
+</body>
+</html>
