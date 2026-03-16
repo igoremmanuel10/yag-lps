@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG — A rede social gay brasileira</title>
+<meta name="description" content="Gente real. A rede social gay brasileira. 100% verificada. Sem fakes. Sem download. R$ 69,90/mes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --yellow: #f8b506;
+  --black: #000000;
+  --white: #ffffff;
+  --red: #ff6b6b;
+  --gray: #888888;
+  --gray-dark: #333333;
+  --gray-light: #aaaaaa;
+  --radius-lg: 20px;
+  --shadow-screenshot: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: var(--black);
+  background: var(--yellow);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* --- UTILITY --- */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.btn {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.btn:active { transform: translateY(0); }
+
+.btn-black {
+  background: var(--black);
+  color: var(--white);
+  padding: 20px 48px;
+}
+
+.btn-yellow {
+  background: var(--yellow);
+  color: var(--black);
+  padding: 20px 48px;
+}
+
+.screenshot {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-screenshot);
+  max-width: 280px;
+  width: 100%;
+  display: block;
+}
+
+/* --- SCROLL REVEAL --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================
+   1. HERO
+   ============================ */
+.hero {
+  min-height: 100vh;
+  background: var(--yellow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.hero-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.hero-nav .logo img {
+  height: 40px;
+  filter: brightness(0);
+}
+
+.hero-nav .btn-enter {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  background: var(--black);
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.hero-nav .btn-enter:hover { transform: translateY(-1px); }
+
+.hero-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding-bottom: 64px;
+}
+
+.hero-text { max-width: 600px; }
+
+.hero-text h1 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: clamp(56px, 8vw, 100px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 24px;
+}
+
+.hero-text .sub {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--black);
+  opacity: 0.7;
+  margin-bottom: 40px;
+  max-width: 440px;
+}
+
+.hero-text .fine {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--black);
+  opacity: 0.5;
+}
+
+.hero-image {
+  flex-shrink: 0;
+}
+
+.hero-image .screenshot {
+  transform: rotate(2deg);
+}
+
+/* ============================
+   2. PROVA SOCIAL
+   ============================ */
+.proof {
+  background: var(--black);
+  padding: 28px 0;
+  overflow: hidden;
+}
+
+.proof-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 28px;
+  border-right: 1px solid #333;
+}
+
+.proof-item:last-child { border-right: none; }
+
+.proof-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.proof-item span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* ============================
+   3. O PROBLEMA
+   ============================ */
+.problem {
+  background: var(--yellow);
+  padding: 100px 0;
+}
+
+.problem .label { color: var(--black); opacity: 0.5; }
+
+.problem h2 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--black);
+  margin-bottom: 48px;
+  max-width: 560px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.problem-card {
+  background: var(--black);
+  color: var(--white);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.problem-card .icon-x {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.problem-card .icon-x svg {
+  width: 14px;
+  height: 14px;
+}
+
+.problem-card p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ============================
+   4. A SOLUCAO
+   ============================ */
+.solution {
+  background: var(--black);
+  padding: 100px 0;
+  text-align: center;
+}
+
+.solution .label { color: var(--yellow); }
+
+.solution h2 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.solution .sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--gray-light);
+  max-width: 520px;
+  margin: 0 auto 56px;
+  line-height: 1.6;
+}
+
+.solution .screenshot-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+.solution .screenshot-wrap .screenshot {
+  max-width: 300px;
+  border: 4px solid #222;
+  box-shadow: 0 20px 80px rgba(248, 181, 6, 0.15);
+}
+
+/* ============================
+   5. FEATURES
+   ============================ */
+.features {
+  background: var(--yellow);
+  padding: 100px 0;
+}
+
+.feature-block {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin-bottom: 80px;
+}
+
+.feature-block:last-child { margin-bottom: 0; }
+
+.feature-block.reverse { flex-direction: row-reverse; }
+
+.feature-block .feature-img {
+  flex-shrink: 0;
+}
+
+.feature-block .feature-img .screenshot {
+  max-width: 260px;
+}
+
+.feature-block .feature-text {
+  max-width: 400px;
+}
+
+.feature-block .feature-text h3 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+
+.feature-block .feature-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--black);
+  opacity: 0.75;
+}
+
+/* ============================
+   6. COMPARATIVO
+   ============================ */
+.compare {
+  background: var(--black);
+  padding: 100px 0;
+}
+
+.compare h2 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 40px);
+  color: var(--white);
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.compare h2 .them {
+  color: var(--red);
+  text-decoration: line-through;
+}
+
+.compare h2 .yag {
+  color: var(--yellow);
+}
+
+.compare-table {
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid #222;
+}
+
+.compare-row.header {
+  border-bottom: 2px solid #333;
+  margin-bottom: 4px;
+}
+
+.compare-cell {
+  padding: 16px 20px;
+  font-size: 15px;
+  color: var(--white);
+}
+
+.compare-row.header .compare-cell {
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-bottom: 12px;
+}
+
+.compare-cell.label-col {
+  color: var(--gray-light);
+  font-weight: 400;
+}
+
+.compare-cell.them-col {
+  color: #666;
+  text-align: center;
+}
+
+.compare-cell.yag-col {
+  text-align: center;
+  color: var(--yellow);
+  font-weight: 600;
+  border-left: 2px solid var(--yellow);
+  border-right: 2px solid var(--yellow);
+}
+
+.compare-row:first-child .yag-col {
+  border-top: 2px solid var(--yellow);
+  border-radius: 12px 12px 0 0;
+}
+
+.compare-row:last-child .yag-col {
+  border-bottom: 2px solid var(--yellow);
+  border-radius: 0 0 12px 12px;
+}
+
+/* ============================
+   7. MANIFESTO
+   ============================ */
+.manifesto {
+  background: var(--yellow);
+  padding: 100px 0;
+  text-align: center;
+}
+
+.manifesto-text {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.manifesto-text p {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.5;
+  color: var(--black);
+  margin-bottom: 40px;
+}
+
+.manifesto-text .highlight {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 48px);
+  color: var(--black);
+  display: block;
+  margin-bottom: 32px;
+}
+
+.manifesto-text .closing {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 22px);
+  color: var(--black);
+  opacity: 0.7;
+}
+
+/* ============================
+   8. PRECO
+   ============================ */
+.pricing {
+  background: var(--black);
+  padding: 100px 0;
+  text-align: center;
+}
+
+.pricing .price {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: clamp(56px, 8vw, 72px);
+  color: var(--yellow);
+  line-height: 1;
+}
+
+.pricing .period {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: var(--gray);
+  margin-bottom: 12px;
+}
+
+.pricing .tagline {
+  font-size: 16px;
+  color: var(--gray);
+  margin-bottom: 48px;
+}
+
+.pricing-list {
+  list-style: none;
+  max-width: 320px;
+  margin: 0 auto 48px;
+  text-align: left;
+}
+
+.pricing-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 15px;
+  color: var(--white);
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.pricing-list li svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.pricing .fine {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--gray);
+}
+
+/* ============================
+   9. FAQ
+   ============================ */
+.faq {
+  background: var(--yellow);
+  padding: 100px 0;
+}
+
+.faq h2 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--black);
+  margin-bottom: 40px;
+}
+
+.faq-list {
+  max-width: 680px;
+}
+
+.faq-item {
+  border: 2px solid var(--black);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.faq-item.open {
+  background: var(--black);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--black);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+.faq-item.open .faq-question {
+  color: var(--white);
+}
+
+.faq-question .faq-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 200px;
+}
+
+.faq-answer p {
+  padding: 0 24px 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-light);
+}
+
+/* ============================
+   10. CTA FINAL
+   ============================ */
+.cta-final {
+  background: var(--black);
+  padding: 100px 0 80px;
+  text-align: center;
+}
+
+.cta-final h2 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--white);
+  margin-bottom: 40px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.2;
+}
+
+.cta-final .footer-meta {
+  margin-top: 56px;
+}
+
+.cta-final .footer-logo img {
+  height: 32px;
+  filter: brightness(0) invert(1);
+  opacity: 0.4;
+}
+
+.cta-final .footer-handle {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 12px;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+
+  .hero-text .sub { margin-left: auto; margin-right: auto; }
+
+  .hero-image .screenshot {
+    margin: 0 auto;
+    max-width: 240px;
+  }
+
+  .proof-inner { flex-wrap: wrap; justify-content: center; }
+
+  .proof-item {
+    border-right: none;
+    padding: 8px 20px;
+  }
+
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-block,
+  .feature-block.reverse {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .feature-block .feature-text {
+    max-width: 100%;
+  }
+
+  .feature-block .feature-img .screenshot {
+    margin: 0 auto;
+    max-width: 220px;
+  }
+
+  .compare-cell {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .compare-row {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+
+  .btn-black, .btn-yellow {
+    padding: 18px 36px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 { font-size: 48px; }
+  .hero-text .sub { font-size: 17px; }
+  .btn-black, .btn-yellow { padding: 16px 32px; font-size: 14px; width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== 1. HERO ========== -->
+<section class="hero">
+  <div class="container">
+    <nav class="hero-nav">
+      <a href="#" class="logo">
+        <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+      </a>
+      <a href="#" class="btn-enter">Entrar</a>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-text reveal">
+        <h1>GENTE REAL.</h1>
+        <p class="sub">A rede social gay brasileira. 100% verificada. Sem fakes. Sem download.</p>
+        <a href="#" class="btn btn-black">Fazer parte — R$ 69,90/mes</a>
+        <p class="fine">Sem download. Acessa no navegador. Cancele quando quiser.</p>
+      </div>
+      <div class="hero-image reveal" style="transition-delay:0.15s">
+        <img src="../screenshots/10_feed_mobile.png" alt="YAG Feed" class="screenshot" style="transform:rotate(2deg)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2. PROVA SOCIAL ========== -->
+<section class="proof">
+  <div class="container">
+    <div class="proof-inner">
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>100% verificado</span>
+      </div>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Sem fakes</span>
+      </div>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Sem download</span>
+      </div>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Dados privados</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. O PROBLEMA ========== -->
+<section class="problem">
+  <div class="container">
+    <span class="label reveal">O PROBLEMA</span>
+    <h2 class="reveal">O mercado gay digital esta quebrado.</h2>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="icon-x">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p>Apps cheios de bots e fakes</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.1s">
+        <div class="icon-x">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p>R$ 120/mes pra ver propaganda</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.2s">
+        <div class="icon-x">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p>Apps gringos que ignoram o Brasil</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:0.3s">
+        <div class="icon-x">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p>Seus dados vendidos pra anunciante</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. A SOLUCAO ========== -->
+<section class="solution">
+  <div class="container">
+    <span class="label reveal">A SOLUCAO</span>
+    <h2 class="reveal">A gente construiu o nosso.</h2>
+    <p class="sub reveal">Feed pra se expressar. Radar pra saber quem ta perto. Chat pra conversar de verdade. Tudo num so lugar.</p>
+    <div class="screenshot-wrap reveal">
+      <img src="../screenshots/09_radar_mobile.png" alt="YAG Radar" class="screenshot">
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5. FEATURES ========== -->
+<section class="features">
+  <div class="container">
+    <div class="feature-block reveal">
+      <div class="feature-img">
+        <img src="../screenshots/09_radar_mobile.png" alt="Radar" class="screenshot" style="transform:rotate(-2deg)">
+      </div>
+      <div class="feature-text">
+        <h3>Radar</h3>
+        <p>Quem ta perto. De verdade. Veja quem esta online agora na sua regiao.</p>
+      </div>
+    </div>
+    <div class="feature-block reverse reveal">
+      <div class="feature-img">
+        <img src="../screenshots/10_feed_mobile.png" alt="Feed" class="screenshot" style="transform:rotate(2deg)">
+      </div>
+      <div class="feature-text">
+        <h3>Feed</h3>
+        <p>Poste. Curta. Comente. Gente real. Sem algoritmo escondendo seu conteudo.</p>
+      </div>
+    </div>
+    <div class="feature-block reveal">
+      <div class="feature-img">
+        <img src="../screenshots/07_chat.png" alt="Chat" class="screenshot" style="transform:rotate(-1deg)">
+      </div>
+      <div class="feature-text">
+        <h3>Chat</h3>
+        <p>Conversas que acontecem de verdade. Sem bot respondendo por ninguem.</p>
+      </div>
+    </div>
+    <div class="feature-block reverse reveal">
+      <div class="feature-img">
+        <img src="../screenshots/12_profile_detail_mobile.png" alt="Perfis" class="screenshot" style="transform:rotate(2deg)">
+      </div>
+      <div class="feature-text">
+        <h3>Perfis verificados</h3>
+        <p>Todo mundo mostra a cara. Todo mundo e real. Verificacao por selfie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. COMPARATIVO ========== -->
+<section class="compare">
+  <div class="container">
+    <h2 class="reveal"><span class="them">Eles</span> vs <span class="yag">YAG</span></h2>
+    <div class="compare-table reveal">
+      <div class="compare-row header">
+        <div class="compare-cell label-col"></div>
+        <div class="compare-cell them-col">Eles</div>
+        <div class="compare-cell yag-col">YAG</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label-col">Preco</div>
+        <div class="compare-cell them-col">R$ 120/mes</div>
+        <div class="compare-cell yag-col">R$ 69,90/mes</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label-col">Fakes</div>
+        <div class="compare-cell them-col">Cheio</div>
+        <div class="compare-cell yag-col">Zero</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label-col">Acesso web</div>
+        <div class="compare-cell them-col">Cobra extra</div>
+        <div class="compare-cell yag-col">Padrao</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label-col">Dados</div>
+        <div class="compare-cell them-col">Vendidos</div>
+        <div class="compare-cell yag-col">Privados</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label-col">Verificacao</div>
+        <div class="compare-cell them-col">Opcional</div>
+        <div class="compare-cell yag-col">Obrigatoria</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. MANIFESTO ========== -->
+<section class="manifesto">
+  <div class="container">
+    <div class="manifesto-text reveal">
+      <p>A gente sempre precisou se esconder. Criaram um mundo digital pra gente. So que nao era nosso. Era gringo. Era frio. Era uma grade de fotos sem alma.</p>
+      <span class="highlight">A gente cansou.</span>
+      <p class="closing">Aqui todo mundo mostra a cara. Todo mundo e real. Isso e o YAG.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. PRECO ========== -->
+<section class="pricing">
+  <div class="container">
+    <div class="reveal">
+      <div class="price">R$ 69,90</div>
+      <div class="period">/mes</div>
+      <p class="tagline">Menos que uma noite fora.</p>
+    </div>
+    <ul class="pricing-list reveal">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Perfis verificados
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Chat ilimitado
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Radar
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Feed completo
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Sem anuncios
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f8b506" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Cancele quando quiser
+      </li>
+    </ul>
+    <div class="reveal">
+      <a href="#" class="btn btn-yellow">Fazer parte</a>
+      <p class="fine">Cancele quando quiser. Sem surpresa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. FAQ ========== -->
+<section class="faq">
+  <div class="container">
+    <h2 class="reveal">Perguntas</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>Preciso baixar algum app?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nao. O YAG funciona no navegador. Chrome, Safari, qualquer um. Mobile ou desktop.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:0.05s">
+        <button class="faq-question" aria-expanded="false">
+          <span>Tem fake?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nao. Todo mundo e verificado. Todo mundo paga pra estar. Zero bots, zero fakes.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:0.1s">
+        <button class="faq-question" aria-expanded="false">
+          <span>Posso cancelar?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Sim. Cancele quando quiser, direto na sua conta. Sem burocracia.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:0.15s">
+        <button class="faq-question" aria-expanded="false">
+          <span>Qual a diferenca pro Grindr?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>YAG e comunidade completa: feed, radar, chat, busca. Nao e grid de foto. E custa menos.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:0.2s">
+        <button class="faq-question" aria-expanded="false">
+          <span>E seguro?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Homofobia = ban em 15 minutos. Moderacao ativa. Botao de denuncia em tudo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 10. CTA FINAL ========== -->
+<section class="cta-final">
+  <div class="container">
+    <h2 class="reveal">Seu lugar. Sem pedir permissao.</h2>
+    <div class="reveal">
+      <a href="#" class="btn btn-yellow">Entrar — R$ 69,90/mes</a>
+    </div>
+    <div class="footer-meta reveal">
+      <div class="footer-logo">
+        <img src="../img/logo-app.png" alt="YAG">
+      </div>
+      <p class="footer-handle">@yag_social</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+// Scroll reveal with IntersectionObserver
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  if (!reveals.length) return;
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  reveals.forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+// FAQ accordion
+(function() {
+  var questions = document.querySelectorAll('.faq-question');
+  questions.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Toggle clicked
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
