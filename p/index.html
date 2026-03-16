@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG — Gente real. Perto de voce.</title>
+<meta name="description" content="A comunidade gay brasileira. 100% verificada. Feed, Radar, Chat, Busca. Tudo num navegador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --yellow:#F5C518;
+  --yellow-hover:#FFD740;
+  --red:#E53935;
+  --bg-black:#000;
+  --bg-dark:#0a0a0a;
+  --bg-darker:#1a1a1a;
+  --white:#fff;
+  --white-80:rgba(255,255,255,.8);
+  --white-50:rgba(255,255,255,.5);
+  --font-display:'Sora',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg-black);
+  color:var(--white);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{border:none;cursor:pointer;font-family:inherit}
+
+/* ===== UTILITY ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== CTA BUTTON ===== */
+.cta-btn{
+  display:inline-block;
+  background:var(--yellow);
+  color:#000;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:16px;
+  padding:16px 36px;
+  border-radius:60px;
+  letter-spacing:-.01em;
+  transition:background .25s,transform .25s,box-shadow .25s;
+}
+.cta-btn:hover{
+  background:var(--yellow-hover);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(245,197,24,.3);
+}
+.cta-btn-sm{font-size:14px;padding:12px 28px}
+
+/* ======================================================
+   1. NAV
+   ====================================================== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,transparent 100%);
+  transition:background .3s;
+}
+nav.scrolled{background:rgba(0,0,0,.92);backdrop-filter:blur(12px)}
+nav img{height:40px}
+nav .cta-btn{font-size:14px;padding:10px 24px}
+
+/* ======================================================
+   2. HERO
+   ====================================================== */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+}
+.hero-mosaic{
+  position:absolute;inset:0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(3,1fr);
+  gap:8px;
+  padding:8px;
+}
+.hero-mosaic img{
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:16px;
+}
+.hero-mosaic img:nth-child(1){grid-row:span 2}
+.hero-mosaic img:nth-child(5){grid-row:span 2}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.15) 100%);
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 24px 64px;
+  max-width:800px;
+}
+.hero-content h1{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(36px,7vw,56px);
+  line-height:1.08;
+  letter-spacing:-.03em;
+  margin-bottom:16px;
+}
+.hero-content p{
+  font-weight:300;
+  font-size:clamp(16px,2.5vw,18px);
+  color:var(--white-80);
+  margin-bottom:32px;
+  max-width:480px;
+}
+.hero-content .cta-btn{font-size:clamp(14px,2vw,16px)}
+
+/* ======================================================
+   3. PROVA SOCIAL
+   ====================================================== */
+.proof{
+  background:var(--bg-darker);
+  padding:20px 0;
+  overflow:hidden;
+}
+.proof-inner{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.proof-inner span{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--yellow);
+  white-space:nowrap;
+}
+.proof-inner span::before{
+  content:'';
+  display:inline-block;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--yellow);
+  margin-right:10px;
+  vertical-align:middle;
+}
+
+/* ======================================================
+   4. PROBLEMA
+   ====================================================== */
+.problem{
+  background:var(--bg-black);
+  padding:100px 0;
+}
+.problem-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+.problem-img{
+  border-radius:24px;
+  overflow:hidden;
+  aspect-ratio:3/4;
+  max-height:560px;
+}
+.problem-img img{width:100%;height:100%;object-fit:cover}
+.problem-text h2{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(32px,5vw,44px);
+  letter-spacing:-.02em;
+  margin-bottom:32px;
+}
+.problem-list{list-style:none;display:flex;flex-direction:column;gap:20px}
+.problem-list li{
+  font-weight:300;
+  font-size:17px;
+  color:var(--white-80);
+  display:flex;align-items:flex-start;gap:14px;
+  line-height:1.4;
+}
+.problem-list li::before{
+  content:'\2715';
+  color:var(--red);
+  font-weight:700;
+  font-size:20px;
+  flex-shrink:0;
+  margin-top:-1px;
+}
+
+/* ======================================================
+   5. SOLUCAO
+   ====================================================== */
+.solution{
+  background:var(--bg-dark);
+  padding:100px 0;
+}
+.solution-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+.solution-text h2{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(32px,5vw,44px);
+  letter-spacing:-.02em;
+  color:var(--yellow);
+  margin-bottom:20px;
+}
+.solution-text p{
+  font-weight:300;
+  font-size:18px;
+  color:var(--white-80);
+  line-height:1.6;
+}
+.solution-img{
+  border-radius:24px;
+  overflow:hidden;
+  aspect-ratio:3/2;
+}
+.solution-img img{width:100%;height:100%;object-fit:cover}
+
+/* ======================================================
+   6. FEATURES
+   ====================================================== */
+.features{
+  background:var(--bg-black);
+  padding:100px 0;
+}
+.feature-block{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+  margin-bottom:80px;
+}
+.feature-block:last-child{margin-bottom:0}
+.feature-block.reverse .feature-visual{order:-1}
+.feature-visual{
+  border-radius:20px;
+  overflow:hidden;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.feature-visual img{
+  border-radius:16px;
+  max-height:480px;
+  width:auto;
+  max-width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.feature-text h3{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(24px,4vw,36px);
+  letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+.feature-text .label{
+  font-weight:600;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--yellow);
+  margin-bottom:8px;
+}
+.feature-text p{
+  font-weight:300;
+  font-size:17px;
+  color:var(--white-80);
+  line-height:1.6;
+}
+
+/* ======================================================
+   7. COMPARATIVO
+   ====================================================== */
+.compare{
+  background:var(--bg-darker);
+  padding:100px 0;
+}
+.compare h2{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(28px,5vw,40px);
+  text-align:center;
+  margin-bottom:48px;
+  letter-spacing:-.02em;
+}
+.compare h2 .them{
+  text-decoration:line-through;
+  color:var(--red);
+  opacity:.7;
+}
+.compare h2 .us{
+  color:var(--yellow);
+}
+.compare-table{
+  max-width:700px;
+  margin:0 auto;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+}
+.compare-row{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.compare-row:last-child{border-bottom:none}
+.compare-row.header{
+  background:rgba(255,255,255,.04);
+  font-weight:600;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.compare-cell{
+  padding:16px 20px;
+  font-size:15px;
+  font-weight:300;
+  color:var(--white-80);
+}
+.compare-row.header .compare-cell{
+  color:var(--white-50);
+  font-weight:600;
+}
+.compare-cell.them-col{opacity:.5}
+.compare-cell.us-col{
+  background:rgba(245,197,24,.04);
+  color:var(--yellow);
+  font-weight:400;
+}
+.compare-row.header .compare-cell.us-col{
+  color:var(--yellow);
+  border-top:2px solid var(--yellow);
+}
+
+/* ======================================================
+   8. MANIFESTO
+   ====================================================== */
+.manifesto{
+  position:relative;
+  padding:120px 0;
+  overflow:hidden;
+  min-height:480px;
+  display:flex;
+  align-items:center;
+}
+.manifesto-bg{
+  position:absolute;inset:0;
+}
+.manifesto-bg img{width:100%;height:100%;object-fit:cover}
+.manifesto-bg::after{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.72);
+}
+.manifesto-content{
+  position:relative;z-index:2;
+  max-width:680px;
+}
+.manifesto-content p{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(22px,3.5vw,28px);
+  line-height:1.45;
+  margin-bottom:24px;
+}
+.manifesto-content .highlight{
+  color:var(--yellow);
+  font-size:clamp(32px,5vw,40px);
+  line-height:1.2;
+}
+
+/* ======================================================
+   9. PRECO
+   ====================================================== */
+.pricing{
+  background:var(--bg-dark);
+  padding:100px 0;
+  text-align:center;
+}
+.pricing-card{
+  max-width:480px;
+  margin:0 auto;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:56px 40px;
+}
+.pricing-price{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(48px,10vw,72px);
+  color:var(--yellow);
+  letter-spacing:-.04em;
+  line-height:1;
+}
+.pricing-sub{
+  font-weight:300;
+  font-size:17px;
+  color:var(--white-50);
+  margin:8px 0 36px;
+}
+.pricing-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:40px;
+  text-align:left;
+  max-width:280px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.pricing-list li{
+  font-weight:300;
+  font-size:16px;
+  color:var(--white-80);
+  display:flex;align-items:center;gap:12px;
+}
+.pricing-list li::before{
+  content:'';
+  display:inline-block;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--yellow);
+  flex-shrink:0;
+}
+
+/* ======================================================
+   10. FAQ
+   ====================================================== */
+.faq{
+  background:var(--bg-darker);
+  padding:100px 0;
+}
+.faq h2{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(28px,5vw,40px);
+  text-align:center;
+  margin-bottom:48px;
+  letter-spacing:-.02em;
+}
+.faq-list{
+  max-width:640px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.faq-item{
+  background:rgba(255,255,255,.03);
+  border-radius:12px;
+  overflow:hidden;
+}
+.faq-question{
+  width:100%;
+  background:none;
+  color:var(--white);
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:16px;
+  padding:20px 24px;
+  text-align:left;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:color .25s;
+}
+.faq-question:hover{color:var(--yellow)}
+.faq-question::after{
+  content:'+';
+  font-size:22px;
+  font-weight:300;
+  transition:transform .3s;
+  color:var(--yellow);
+}
+.faq-item.open .faq-question::after{
+  transform:rotate(45deg);
+}
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s cubic-bezier(.16,1,.3,1),padding .35s;
+}
+.faq-answer-inner{
+  padding:0 24px 20px;
+  font-weight:300;
+  font-size:15px;
+  color:var(--white-80);
+  line-height:1.5;
+}
+
+/* ======================================================
+   11. CTA FINAL
+   ====================================================== */
+.final-cta{
+  position:relative;
+  background:var(--bg-black);
+  padding:120px 0;
+  text-align:center;
+  overflow:hidden;
+}
+.final-faces{
+  position:absolute;inset:0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(2,1fr);
+  gap:8px;
+  padding:8px;
+  filter:blur(6px) brightness(.35);
+}
+.final-faces img{
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:12px;
+}
+.final-content{
+  position:relative;z-index:2;
+}
+.final-content h2{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(28px,5vw,40px);
+  letter-spacing:-.02em;
+  margin-bottom:28px;
+}
+.final-content .cta-btn{margin-bottom:32px}
+.final-footer{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+}
+.final-footer img{height:32px;opacity:.5}
+.final-footer span{
+  font-size:13px;
+  color:var(--white-50);
+  font-weight:300;
+}
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
+@media(max-width:768px){
+  .hero-mosaic{
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(4,1fr);
+  }
+  .hero-content{padding-bottom:48px}
+  .problem-grid,
+  .solution-grid{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+  .problem-img{max-height:360px}
+  .solution-grid .solution-img{order:-1}
+  .feature-block{
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-bottom:56px;
+  }
+  .feature-block.reverse .feature-visual{order:-1}
+  .feature-visual{order:-1}
+  .feature-visual{padding:16px}
+  .feature-visual img{max-height:380px}
+  .compare-cell{padding:12px 14px;font-size:13px}
+  .manifesto{padding:80px 0;min-height:auto}
+  .pricing-card{padding:40px 24px}
+  .proof-inner{gap:16px;justify-content:center}
+  .proof-inner span{font-size:11px}
+  .final-faces{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
+  nav{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/"><img src="../img/yag2.png" alt="YAG" style="height:40px"></a>
+  <a href="#pricing" class="cta-btn cta-btn-sm">Entrar</a>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-mosaic">
+    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=600&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=400&h=400&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&h=400&fit=crop" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?w=400&h=400&fit=crop" alt="" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Gente real.<br>Perto de voce.</h1>
+    <p>A comunidade gay brasileira. 100% verificada.</p>
+    <a href="#pricing" class="cta-btn">Fazer parte — R$ 69,90/mes</a>
+  </div>
+</section>
+
+<!-- 2. PROVA SOCIAL -->
+<section class="proof">
+  <div class="container">
+    <div class="proof-inner">
+      <span>100% verificado</span>
+      <span>So assinantes</span>
+      <span>Zero fakes</span>
+      <span>Sem download</span>
+    </div>
+  </div>
+</section>
+
+<!-- 3. O PROBLEMA -->
+<section class="problem">
+  <div class="container">
+    <div class="problem-grid reveal">
+      <div class="problem-img">
+        <img src="https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=800&h=1000&fit=crop" alt="Cara olhando o celular">
+      </div>
+      <div class="problem-text">
+        <h2>Cansou de fake?</h2>
+        <ul class="problem-list">
+          <li>Bots em todo lugar.</li>
+          <li>R$ 120/mes pra nada.</li>
+          <li>Apps gringos que ignoram o Brasil.</li>
+          <li>Seus dados vendidos.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. A SOLUCAO -->
+<section class="solution">
+  <div class="container">
+    <div class="solution-grid reveal">
+      <div class="solution-text">
+        <h2>A gente construiu o nosso.</h2>
+        <p>Feed. Radar. Chat. Busca. Tudo num so lugar. Todo mundo real.</p>
+      </div>
+      <div class="solution-img">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=800&fit=crop" alt="Grupo de amigos rindo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. FEATURES -->
+<section class="features">
+  <div class="container">
+
+    <!-- Radar -->
+    <div class="feature-block reveal">
+      <div class="feature-text">
+        <div class="label">Radar</div>
+        <h3>Quem ta perto. De verdade.</h3>
+        <p>Veja quem esta por perto agora, com distancia real e perfis verificados.</p>
+      </div>
+      <div class="feature-visual">
+        <img src="../screenshots/09_radar_mobile.png" alt="Radar do YAG">
+      </div>
+    </div>
+
+    <!-- Feed -->
+    <div class="feature-block reverse reveal">
+      <div class="feature-text">
+        <div class="label">Feed</div>
+        <h3>Poste. Curta. Comente. Gente real.</h3>
+        <p>Uma timeline so com pessoas reais. Sem algoritmo, sem publicidade, sem bot.</p>
+      </div>
+      <div class="feature-visual">
+        <img src="../screenshots/10_feed_mobile.png" alt="Feed do YAG">
+      </div>
+    </div>
+
+    <!-- Chat -->
+    <div class="feature-block reveal">
+      <div class="feature-text">
+        <div class="label">Chat</div>
+        <h3>Conversas reais. Sem bot.</h3>
+        <p>Mensagens diretas com quem voce quer. Cada perfil e verificado antes de entrar.</p>
+      </div>
+      <div class="feature-visual">
+        <img src="../screenshots/07_chat.png" alt="Chat do YAG">
+      </div>
+    </div>
+
+    <!-- Busca -->
+    <div class="feature-block reverse reveal">
+      <div class="feature-text">
+        <div class="label">Busca</div>
+        <h3>Encontre quem importa.</h3>
+        <p>Filtre por cidade, idade, interesses. Encontre gente que faz sentido pra voce.</p>
+      </div>
+      <div class="feature-visual">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=600&fit=crop" alt="Cara sorrindo" style="border-radius:20px">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6. COMPARATIVO -->
+<section class="compare">
+  <div class="container">
+    <h2 class="reveal"><span class="them">Eles</span> vs <span class="us">YAG</span></h2>
+    <div class="compare-table reveal">
+      <div class="compare-row header">
+        <div class="compare-cell"></div>
+        <div class="compare-cell them-col">Eles</div>
+        <div class="compare-cell us-col">YAG</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Preco</div>
+        <div class="compare-cell them-col">R$ 90-150/mes</div>
+        <div class="compare-cell us-col">R$ 69,90/mes</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Fakes</div>
+        <div class="compare-cell them-col">Lotado</div>
+        <div class="compare-cell us-col">Zero</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Acesso web</div>
+        <div class="compare-cell them-col">So app</div>
+        <div class="compare-cell us-col">Navegador</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Seus dados</div>
+        <div class="compare-cell them-col">Vendidos</div>
+        <div class="compare-cell us-col">Protegidos</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Verificacao</div>
+        <div class="compare-cell them-col">Opcional</div>
+        <div class="compare-cell us-col">Obrigatoria</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-bg">
+    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1200&h=800&fit=crop" alt="">
+  </div>
+  <div class="container">
+    <div class="manifesto-content reveal">
+      <p>A gente sempre precisou se esconder.<br>A gente cansou.<br>Aqui todo mundo e real.</p>
+      <p class="highlight">Isso e o YAG.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. PRECO -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-card reveal">
+      <div class="pricing-price">R$ 69,90</div>
+      <div class="pricing-sub">/mes &middot; Menos que uma noite fora.</div>
+      <ul class="pricing-list">
+        <li>Perfis 100% verificados</li>
+        <li>Chat ilimitado</li>
+        <li>Radar por proximidade</li>
+        <li>Feed da comunidade</li>
+        <li>Cancele quando quiser</li>
+      </ul>
+      <a href="#" class="cta-btn">Fazer parte</a>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2 class="reveal">Perguntas frequentes</h2>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">Preciso baixar?</button>
+        <div class="faq-answer"><div class="faq-answer-inner">Nao. Funciona direto no navegador do celular ou computador. Sem app, sem download, sem ocupar espaco.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Tem fake?</button>
+        <div class="faq-answer"><div class="faq-answer-inner">Zero. Todo perfil passa por verificacao obrigatoria antes de acessar a plataforma.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Posso cancelar?</button>
+        <div class="faq-answer"><div class="faq-answer-inner">Sim. Quando quiser. Sem burocracia, sem taxa de cancelamento.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Qual a diferenca pro Grindr?</button>
+        <div class="faq-answer"><div class="faq-answer-inner">YAG e uma comunidade completa: feed, radar, chat e busca. Nao e so um grid de fotos. Todo mundo e verificado e a plataforma e 100% brasileira.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">E seguro?</button>
+        <div class="faq-answer"><div class="faq-answer-inner">Sim. Perfis falsos e comportamento abusivo levam ban em ate 15 minutos. Seus dados nunca sao vendidos.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. CTA FINAL -->
+<section class="final-cta">
+  <div class="final-faces">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=400&h=400&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?w=400&h=400&fit=crop" alt="">
+  </div>
+  <div class="final-content">
+    <h2>Seu lugar.<br>Sem pedir permissao.</h2>
+    <a href="#pricing" class="cta-btn" style="margin-bottom:32px;display:inline-block">Entrar — R$ 69,90/mes</a>
+    <div class="final-footer">
+      <img src="../img/yag2.png" alt="YAG">
+      <span>@yag_social</span>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// Scroll reveal with IntersectionObserver
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -40px 0px'
+});
+reveals.forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    // Toggle clicked
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
