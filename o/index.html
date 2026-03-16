@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG — Uma Frase por Tela</title>
+<meta name="description" content="YAG. A rede social gay brasileira. 100% verificado. Zero fakes. R$ 69,90/mes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ========== SECTIONS ========== */
+section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 60px 24px;
+  overflow: hidden;
+}
+
+.bg-yellow { background: #f8b506; color: #000; }
+.bg-black  { background: #000;    color: #fff; }
+.bg-white  { background: #fff;    color: #000; }
+
+/* ========== TYPOGRAPHY ========== */
+.sora-800 { font-family: 'Sora', sans-serif; font-weight: 800; }
+.sora-700 { font-family: 'Sora', sans-serif; font-weight: 700; }
+.inter-300 { font-family: 'Inter', sans-serif; font-weight: 300; }
+.inter-400 { font-family: 'Inter', sans-serif; font-weight: 400; }
+.inter-600 { font-family: 'Inter', sans-serif; font-weight: 600; }
+
+/* ========== SCROLL INDICATOR ========== */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+.scroll-indicator.hidden { opacity: 0; pointer-events: none; }
+.scroll-indicator span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: rgba(0,0,0,0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.scroll-arrow {
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid rgba(0,0,0,0.3);
+  border-bottom: 2px solid rgba(0,0,0,0.3);
+  transform: rotate(45deg);
+  animation: bounce-arrow 2s ease-in-out infinite;
+}
+@keyframes bounce-arrow {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(8px); }
+}
+
+/* ========== SECTION COUNTER ========== */
+.section-counter {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: rgba(128,128,128,0.6);
+  z-index: 100;
+  letter-spacing: 0.05em;
+  transition: color 0.4s ease;
+  pointer-events: none;
+}
+
+/* ========== REVEAL ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+.reveal-delay-5 { transition-delay: 0.75s; }
+
+/* ========== TELA 1 ========== */
+.t1-logo {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.t1-logo img {
+  height: 40px;
+  filter: brightness(0);
+}
+.t1-headline {
+  font-size: clamp(40px, 8vw, 100px);
+  line-height: 1.05;
+  text-align: center;
+  max-width: 900px;
+  letter-spacing: -0.02em;
+}
+
+/* ========== TELA 2 ========== */
+.t2-headline {
+  font-size: clamp(36px, 7vw, 80px);
+  line-height: 1.08;
+  text-align: center;
+  max-width: 850px;
+  letter-spacing: -0.02em;
+}
+.t2-sub {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #888;
+  margin-top: 24px;
+  text-align: center;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* ========== TELA 3 ========== */
+.t3-headline {
+  font-size: clamp(60px, 12vw, 140px);
+  line-height: 1;
+  text-align: center;
+  letter-spacing: -0.03em;
+}
+
+/* ========== TELA 4 ========== */
+.t4-headline {
+  font-size: clamp(40px, 8vw, 90px);
+  line-height: 1.05;
+  text-align: center;
+  color: #f8b506;
+  letter-spacing: -0.02em;
+}
+.t4-screenshot {
+  margin-top: 40px;
+  max-width: 280px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(248, 181, 6, 0.15), 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* ========== TELA 5 ========== */
+.t5-headline {
+  font-size: clamp(24px, 4vw, 36px);
+  text-align: center;
+  max-width: 700px;
+  line-height: 1.2;
+  margin-bottom: 48px;
+}
+.t5-numbers {
+  display: flex;
+  gap: clamp(32px, 8vw, 80px);
+  align-items: flex-start;
+}
+.t5-stat { text-align: center; }
+.t5-stat-number {
+  font-size: clamp(48px, 8vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.t5-stat-label {
+  font-size: 14px;
+  color: #888;
+  margin-top: 8px;
+}
+
+/* ========== TELA 6 ========== */
+.t6-headline {
+  font-size: clamp(28px, 4vw, 36px);
+  text-align: center;
+  margin-bottom: 40px;
+}
+.t6-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 640px;
+  width: 100%;
+}
+.t6-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.t6-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #f8b506;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.t6-card-icon svg { width: 20px; height: 20px; }
+.t6-card-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+}
+.t6-card-desc {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.4;
+}
+.t6-card-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+@media (max-width: 520px) {
+  .t6-grid { grid-template-columns: 1fr; max-width: 320px; }
+}
+
+/* ========== TELA 7 ========== */
+.t7-headline {
+  font-size: clamp(32px, 6vw, 48px);
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.1;
+}
+.t7-headline .strikethrough {
+  text-decoration: line-through;
+  text-decoration-color: #e53e3e;
+  text-decoration-thickness: 3px;
+  color: #e53e3e;
+  opacity: 0.7;
+}
+.t7-table {
+  width: 100%;
+  max-width: 600px;
+}
+.t7-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.t7-label { font-family: 'Sora', sans-serif; font-weight: 700; font-size: clamp(14px, 2vw, 16px); }
+.t7-them {
+  font-size: clamp(13px, 2vw, 15px);
+  color: #e53e3e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.t7-us {
+  font-size: clamp(13px, 2vw, 15px);
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.t7-x { display: inline-flex; }
+.t7-check { display: inline-flex; }
+.t7-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #000;
+  margin-bottom: 4px;
+}
+.t7-header span {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+}
+
+/* ========== TELA 8 ========== */
+.t8-price {
+  font-size: clamp(56px, 10vw, 80px);
+  color: #f8b506;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.t8-period {
+  font-size: clamp(18px, 3vw, 24px);
+  color: #888;
+  margin-top: 4px;
+}
+.t8-tagline {
+  font-size: clamp(14px, 2vw, 16px);
+  color: #666;
+  margin-top: 16px;
+}
+.t8-list {
+  list-style: none;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.t8-list li {
+  font-size: 15px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.t8-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #f8b506;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cta-btn {
+  display: inline-block;
+  margin-top: 36px;
+  padding: 18px 48px;
+  background: #f8b506;
+  color: #000;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 18px);
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(248, 181, 6, 0.35);
+}
+.cta-btn:active { transform: translateY(0); }
+
+/* ========== TELA 9 ========== */
+.t9-headline {
+  font-size: clamp(28px, 5vw, 36px);
+  text-align: center;
+  margin-bottom: 32px;
+}
+.faq-container {
+  max-width: 600px;
+  width: 100%;
+}
+.faq-item {
+  border: 1px solid #000;
+  border-radius: 0;
+  margin-bottom: -1px;
+}
+.faq-item:first-child { border-radius: 12px 12px 0 0; }
+.faq-item:last-child { border-radius: 0 0 12px 12px; }
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 24px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 17px);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+}
+.faq-question::after {
+  content: '+';
+  font-size: 22px;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+.faq-item.open .faq-question::after {
+  transform: rotate(45deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+  padding: 0 24px;
+}
+.faq-item.open .faq-answer {
+  max-height: 200px;
+  padding: 0 24px 20px;
+}
+.faq-answer p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ========== TELA 10 ========== */
+.t10-sub {
+  font-size: clamp(28px, 5vw, 40px);
+  text-align: center;
+  line-height: 1.15;
+}
+.t10-headline {
+  font-size: clamp(40px, 7vw, 56px);
+  color: #f8b506;
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: -0.02em;
+}
+.t10-footer {
+  position: absolute;
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+}
+.t10-footer img { height: 28px; filter: brightness(0) invert(1); opacity: 0.5; }
+.t10-footer span { font-size: 13px; color: #666; }
+</style>
+</head>
+<body>
+
+<!-- SECTION COUNTER -->
+<div class="section-counter" id="sectionCounter" aria-hidden="true">1 / 10</div>
+
+<!-- ==================== TELA 1 ==================== -->
+<section class="bg-yellow" data-section="1">
+  <div class="t1-logo reveal">
+    <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+  </div>
+  <h1 class="sora-800 t1-headline reveal">A gente sempre precisou se esconder.</h1>
+  <div class="scroll-indicator" id="scrollIndicator">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ==================== TELA 2 ==================== -->
+<section class="bg-black" data-section="2">
+  <h2 class="sora-700 t2-headline reveal">Criaram um mundo digital pra gente.</h2>
+  <p class="inter-300 t2-sub reveal reveal-delay-1">Era gringo. Era frio. Era uma grade de fotos sem alma.</p>
+</section>
+
+<!-- ==================== TELA 3 ==================== -->
+<section class="bg-yellow" data-section="3">
+  <h2 class="sora-800 t3-headline reveal">A gente cansou.</h2>
+</section>
+
+<!-- ==================== TELA 4 ==================== -->
+<section class="bg-black" data-section="4">
+  <h2 class="sora-700 t4-headline reveal">E construiu o nosso.</h2>
+  <img class="t4-screenshot reveal reveal-delay-1" src="../screenshots/10_feed_mobile.png" alt="YAG Feed" loading="lazy">
+</section>
+
+<!-- ==================== TELA 5 ==================== -->
+<section class="bg-white" data-section="5">
+  <h2 class="sora-700 t5-headline reveal">100% verificado. So assinantes. Zero fakes.</h2>
+  <div class="t5-numbers reveal reveal-delay-1">
+    <div class="t5-stat">
+      <div class="sora-800 t5-stat-number">0</div>
+      <div class="inter-400 t5-stat-label">fakes</div>
+    </div>
+    <div class="t5-stat">
+      <div class="sora-800 t5-stat-number">0</div>
+      <div class="inter-400 t5-stat-label">bots</div>
+    </div>
+    <div class="t5-stat">
+      <div class="sora-800 t5-stat-number">100%</div>
+      <div class="inter-400 t5-stat-label">real</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TELA 6 ==================== -->
+<section class="bg-black" data-section="6">
+  <h2 class="sora-700 t6-headline reveal">O que rola aqui dentro</h2>
+  <div class="t6-grid">
+    <div class="t6-card reveal reveal-delay-1">
+      <div class="t6-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+      </div>
+      <div class="t6-card-title">Radar</div>
+      <div class="t6-card-desc inter-300">Quem ta perto.</div>
+      <img class="t6-card-img" src="../screenshots/09_radar_mobile.png" alt="Radar" loading="lazy">
+    </div>
+    <div class="t6-card reveal reveal-delay-2">
+      <div class="t6-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </div>
+      <div class="t6-card-title">Feed</div>
+      <div class="t6-card-desc inter-300">Gente real. Posts reais.</div>
+      <img class="t6-card-img" src="../screenshots/10_feed_mobile.png" alt="Feed" loading="lazy">
+    </div>
+    <div class="t6-card reveal reveal-delay-3">
+      <div class="t6-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="t6-card-title">Chat</div>
+      <div class="t6-card-desc inter-300">Conversas de verdade.</div>
+      <img class="t6-card-img" src="../screenshots/07_chat.png" alt="Chat" loading="lazy">
+    </div>
+    <div class="t6-card reveal reveal-delay-4">
+      <div class="t6-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="t6-card-title">Busca</div>
+      <div class="t6-card-desc inter-300">Encontre quem importa.</div>
+      <img class="t6-card-img" src="../screenshots/12_profile_detail_mobile.png" alt="Busca" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TELA 7 ==================== -->
+<section class="bg-yellow" data-section="7">
+  <h2 class="sora-800 t7-headline reveal"><span class="strikethrough">Eles</span> vs YAG</h2>
+  <div class="t7-table reveal reveal-delay-1">
+    <div class="t7-header">
+      <span></span>
+      <span>Eles</span>
+      <span>YAG</span>
+    </div>
+    <div class="t7-row">
+      <div class="t7-label">Preco</div>
+      <div class="t7-them"><svg class="t7-x" width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/></svg> R$ 120</div>
+      <div class="t7-us"><svg class="t7-check" width="16" height="16" viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> R$ 69,90</div>
+    </div>
+    <div class="t7-row">
+      <div class="t7-label">Fakes</div>
+      <div class="t7-them"><svg class="t7-x" width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/></svg> Cheio</div>
+      <div class="t7-us"><svg class="t7-check" width="16" height="16" viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Zero</div>
+    </div>
+    <div class="t7-row">
+      <div class="t7-label">Web</div>
+      <div class="t7-them"><svg class="t7-x" width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/></svg> Extra</div>
+      <div class="t7-us"><svg class="t7-check" width="16" height="16" viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Padrao</div>
+    </div>
+    <div class="t7-row">
+      <div class="t7-label">Dados</div>
+      <div class="t7-them"><svg class="t7-x" width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/></svg> Vendidos</div>
+      <div class="t7-us"><svg class="t7-check" width="16" height="16" viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Privados</div>
+    </div>
+    <div class="t7-row" style="border-bottom:none">
+      <div class="t7-label">Verificacao</div>
+      <div class="t7-them"><svg class="t7-x" width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#e53e3e" stroke-width="2.5" stroke-linecap="round"/></svg> Opcional</div>
+      <div class="t7-us"><svg class="t7-check" width="16" height="16" viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Obrigatoria</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TELA 8 ==================== -->
+<section class="bg-black" data-section="8">
+  <div class="sora-800 t8-price reveal">R$ 69,90</div>
+  <div class="inter-300 t8-period reveal reveal-delay-1">/mes</div>
+  <div class="inter-400 t8-tagline reveal reveal-delay-1">Menos que uma noite fora.</div>
+  <ul class="t8-list reveal reveal-delay-2">
+    <li class="inter-400">Verificados</li>
+    <li class="inter-400">Chat</li>
+    <li class="inter-400">Radar</li>
+    <li class="inter-400">Feed</li>
+    <li class="inter-400">Cancele quando quiser</li>
+  </ul>
+  <a href="#" class="cta-btn reveal reveal-delay-3">Fazer parte</a>
+</section>
+
+<!-- ==================== TELA 9 ==================== -->
+<section class="bg-white" data-section="9">
+  <h2 class="sora-700 t9-headline reveal">Perguntas</h2>
+  <div class="faq-container reveal reveal-delay-1">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Preciso baixar?</button>
+      <div class="faq-answer"><p class="inter-300">Nao. Navegador.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Tem fake?</button>
+      <div class="faq-answer"><p class="inter-300">Zero.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Posso cancelar?</button>
+      <div class="faq-answer"><p class="inter-300">Sim. Quando quiser.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">Diferenca pro Grindr?</button>
+      <div class="faq-answer"><p class="inter-300">Comunidade completa.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">E seguro?</button>
+      <div class="faq-answer"><p class="inter-300">Ban em 15 min.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TELA 10 ==================== -->
+<section class="bg-black" data-section="10">
+  <div class="sora-700 t10-sub reveal">Aqui todo mundo e real.</div>
+  <div class="sora-800 t10-headline reveal reveal-delay-1">Isso e o YAG.</div>
+  <a href="#" class="cta-btn reveal reveal-delay-2" style="margin-top:40px">Entrar — R$ 69,90/mes</a>
+  <div class="t10-footer">
+    <img src="../img/logo-app.png" alt="YAG">
+    <span class="inter-300">@yag_social</span>
+  </div>
+</section>
+
+<script>
+// ========== SCROLL INDICATOR ==========
+const scrollIndicator = document.getElementById('scrollIndicator');
+let indicatorHidden = false;
+window.addEventListener('scroll', () => {
+  if (!indicatorHidden && window.scrollY > 80) {
+    scrollIndicator.classList.add('hidden');
+    indicatorHidden = true;
+  }
+}, { passive: true });
+
+// ========== SECTION COUNTER ==========
+const counter = document.getElementById('sectionCounter');
+const sections = document.querySelectorAll('section');
+
+function updateCounter() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const vh = window.innerHeight;
+  let current = 1;
+  sections.forEach((s, i) => {
+    if (scrollTop >= s.offsetTop - vh * 0.5) current = i + 1;
+  });
+  counter.textContent = current + ' / 10';
+
+  // Adapt color to background
+  const sec = sections[current - 1];
+  if (sec) {
+    const isLight = sec.classList.contains('bg-yellow') || sec.classList.contains('bg-white');
+    counter.style.color = isLight ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.25)';
+  }
+}
+window.addEventListener('scroll', updateCounter, { passive: true });
+updateCounter();
+
+// ========== REVEAL ON SCROLL ==========
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// ========== FAQ ACCORDION ==========
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(fi => {
+      fi.classList.remove('open');
+      fi.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+    // Toggle clicked
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
