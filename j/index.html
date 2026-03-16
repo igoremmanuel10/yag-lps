@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAG Social — Sem download. Acessa no navegador.</title>
+<meta name="description" content="Rede social gay que funciona direto no navegador. Sem app store, sem download, sem espera. Feed, Radar, Chat e Busca por R$ 69,90/mes.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #f8b506;
+  --gold-dark: #d4990a;
+  --red: #ff6b6b;
+  --black: #000000;
+  --bg-alt: #0a0a0a;
+  --card-bg: #1a1a1a;
+  --card-border: #2a2a2a;
+  --white: #ffffff;
+  --gray: #888888;
+  --gray-light: #aaaaaa;
+  --gray-dim: #555555;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(248, 181, 6, 0.3);
+  color: var(--white);
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #111;
+}
+
+.header-logo img { height: 32px; width: auto; }
+
+.btn-enter {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--gold);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.btn-enter:hover { background: var(--gold-dark); }
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -20%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(248,181,6,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.hero-text { flex: 1; max-width: 500px; }
+
+.hero-text h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 36px;
+}
+
+.btn-cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--gold);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.btn-cta:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+/* Device mockups */
+.hero-devices {
+  flex: 1;
+  max-width: 520px;
+  position: relative;
+  height: 380px;
+}
+
+.device {
+  position: absolute;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.device-desktop {
+  width: 350px; height: 220px;
+  border-radius: 10px;
+  bottom: 0; right: 0;
+}
+
+.device-tablet {
+  width: 250px; height: 180px;
+  border-radius: 10px;
+  bottom: 60px; right: 160px;
+  z-index: 2;
+}
+
+.device-mobile {
+  width: 140px; height: 260px;
+  border-radius: 16px;
+  bottom: 40px; right: 340px;
+  z-index: 3;
+}
+
+/* Fake UI inside devices */
+.device-ui { padding: 8px; height: 100%; display: flex; flex-direction: column; gap: 6px; }
+
+.device-topbar {
+  height: 10px;
+  background: #222;
+  border-radius: 3px;
+  width: 60%;
+}
+
+.device-line {
+  height: 6px;
+  background: #222;
+  border-radius: 2px;
+}
+
+.device-line.w80 { width: 80%; }
+.device-line.w60 { width: 60%; }
+.device-line.w40 { width: 40%; }
+.device-line.w90 { width: 90%; }
+
+.device-card {
+  background: #222;
+  border-radius: 4px;
+  height: 28px;
+  width: 100%;
+}
+
+.device-card.tall { height: 44px; }
+
+.device-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  flex: 1;
+}
+
+.device-grid-item {
+  background: #222;
+  border-radius: 3px;
+}
+
+.device-dot {
+  width: 24px; height: 24px;
+  background: rgba(248,181,6,0.15);
+  border: 1px solid rgba(248,181,6,0.3);
+  border-radius: 50%;
+  margin: 4px auto;
+}
+
+/* ========== COMPARE ========== */
+.compare {
+  background: var(--bg-alt);
+  padding: 100px 24px;
+}
+
+.compare-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.compare h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 56px;
+  color: var(--white);
+}
+
+.compare h2 span { color: var(--gray); }
+
+.compare-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.compare-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 32px 28px;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.compare-card.them {
+  border-color: rgba(255, 107, 107, 0.2);
+  opacity: 0.7;
+}
+
+.compare-card.us {
+  border-color: rgba(248, 181, 6, 0.3);
+}
+
+.compare-card .label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.compare-card.them .label { color: var(--red); }
+.compare-card.us .label { color: var(--gold); }
+
+.compare-card .price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.compare-card.them .price {
+  color: var(--gray);
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+}
+
+.compare-card.us .price { color: var(--white); }
+
+.compare-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.compare-card ul li {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  padding-left: 22px;
+  position: relative;
+}
+
+.compare-card.them ul li {
+  color: var(--gray-dim);
+}
+
+.compare-card.them ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 5px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,107,107,0.2);
+  border: 1px solid rgba(255,107,107,0.3);
+}
+
+.compare-card.us ul li { color: var(--gray-light); }
+
+.compare-card.us ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 5px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(248,181,6,0.2);
+  border: 1px solid rgba(248,181,6,0.4);
+}
+
+/* ========== BROWSERS ========== */
+.browsers {
+  padding: 100px 24px;
+  text-align: center;
+}
+
+.browsers-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.browsers h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.browsers-subtitle {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--gray);
+  margin-bottom: 48px;
+}
+
+.browsers-grid {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.browser-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.browser-icon {
+  width: 48px; height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.browser-icon svg { width: 40px; height: 40px; }
+
+.browser-item span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+}
+
+.browsers-devices {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ========== FEATURES ========== */
+.features {
+  background: var(--bg-alt);
+  padding: 100px 24px;
+}
+
+.features-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.features h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 28px 16px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid #1f1f1f;
+  transition: border-color 0.2s;
+}
+
+.feature-item:hover { border-color: rgba(248,181,6,0.2); }
+
+.feature-icon {
+  width: 44px; height: 44px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248,181,6,0.08);
+  border-radius: 10px;
+}
+
+.feature-icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feature-item h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.feature-item p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ========== CTA FINAL ========== */
+.cta-final {
+  background: var(--gold);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.cta-final-inner { max-width: 600px; margin: 0 auto; }
+
+.cta-final h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 28px;
+}
+
+.btn-cta-dark {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gold);
+  background: var(--black);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-cta-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid #111;
+}
+
+.footer p {
+  font-size: 12px;
+  color: var(--gray-dim);
+  font-weight: 300;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-text h1 { animation: fadeUp 0.6s ease both; }
+.hero-text p { animation: fadeUp 0.6s ease 0.1s both; }
+.hero-text .btn-cta { animation: fadeUp 0.6s ease 0.2s both; }
+.device-mobile { animation: fadeUp 0.5s ease 0.3s both; }
+.device-tablet { animation: fadeUp 0.5s ease 0.4s both; }
+.device-desktop { animation: fadeUp 0.5s ease 0.5s both; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .hero { padding: 80px 20px 48px; }
+
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 48px;
+  }
+
+  .hero-text { max-width: 100%; }
+
+  .hero-text h1 { font-size: 36px; }
+  .hero-text p { font-size: 16px; }
+
+  .hero-devices {
+    max-width: 320px;
+    height: 260px;
+    margin: 0 auto;
+  }
+
+  .device-desktop { width: 240px; height: 150px; right: 0; bottom: 0; }
+  .device-tablet { width: 170px; height: 130px; right: 100px; bottom: 40px; }
+  .device-mobile { width: 100px; height: 190px; right: 210px; bottom: 20px; }
+
+  .compare { padding: 72px 20px; }
+  .compare h2 { font-size: 24px; margin-bottom: 36px; }
+  .compare-cards { grid-template-columns: 1fr; gap: 16px; }
+  .compare-card { padding: 24px 20px; }
+  .compare-card .price { font-size: 28px; }
+
+  .browsers { padding: 72px 20px; }
+  .browsers h2 { font-size: 22px; }
+  .browsers-grid { gap: 24px; }
+
+  .features { padding: 72px 20px; }
+  .features h2 { font-size: 22px; margin-bottom: 36px; }
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .cta-final { padding: 64px 20px; }
+  .cta-final h2 { font-size: 26px; }
+}
+
+@media (max-width: 420px) {
+  .hero-text h1 { font-size: 30px; }
+
+  .hero-devices { max-width: 280px; height: 220px; }
+  .device-desktop { width: 200px; height: 130px; }
+  .device-tablet { width: 140px; height: 110px; right: 90px; bottom: 30px; }
+  .device-mobile { width: 85px; height: 160px; right: 180px; bottom: 15px; }
+
+  .features-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="../" class="header-logo">
+    <img src="../img/logo-app.png" alt="YAG" style="height:40px">
+  </a>
+  <a href="#" class="btn-enter">Entrar</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Acessa agora.<br>No navegador.</h1>
+      <p>Sem baixar nada. Sem app store. Sem espera.</p>
+      <a href="#" class="btn-cta">Entrar — R$ 69,90/mes</a>
+    </div>
+    <div class="hero-devices">
+      <!-- Mobile -->
+      <div class="device device-mobile">
+        <div class="device-ui">
+          <div class="device-topbar"></div>
+          <div class="device-dot"></div>
+          <div class="device-line w80"></div>
+          <div class="device-line w60"></div>
+          <div class="device-card tall"></div>
+          <div class="device-line w90"></div>
+          <div class="device-card"></div>
+          <div class="device-line w40"></div>
+          <div class="device-card"></div>
+        </div>
+      </div>
+      <!-- Tablet -->
+      <div class="device device-tablet">
+        <div class="device-ui">
+          <div class="device-topbar"></div>
+          <div class="device-grid">
+            <div class="device-grid-item"></div>
+            <div class="device-grid-item"></div>
+            <div class="device-grid-item"></div>
+            <div class="device-grid-item"></div>
+            <div class="device-grid-item"></div>
+            <div class="device-grid-item"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Desktop -->
+      <div class="device device-desktop">
+        <div class="device-ui">
+          <div class="device-topbar"></div>
+          <div style="display:flex;gap:6px;flex:1;">
+            <div style="width:30%;display:flex;flex-direction:column;gap:4px;">
+              <div class="device-card"></div>
+              <div class="device-card"></div>
+              <div class="device-card"></div>
+              <div class="device-card"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+              <div class="device-line w90"></div>
+              <div class="device-card tall"></div>
+              <div class="device-line w60"></div>
+              <div class="device-card tall"></div>
+              <div class="device-line w80"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVO -->
+<section class="compare">
+  <div class="compare-inner">
+    <h2>Acesso web no Grindr: R$ 120/mes.<br><span>No YAG: padrao.</span></h2>
+    <div class="compare-cards">
+      <!-- Eles -->
+      <div class="compare-card them">
+        <div class="label">Eles</div>
+        <div class="price">R$ 120/mes</div>
+        <ul>
+          <li>Acesso web e cobrado a parte</li>
+          <li>Cheio de perfis falsos e bots</li>
+          <li>Mesma interface de sempre</li>
+        </ul>
+      </div>
+      <!-- YAG -->
+      <div class="compare-card us">
+        <div class="label">YAG</div>
+        <div class="price">R$ 69,90/mes</div>
+        <ul>
+          <li>Web e o padrao, nao e extra</li>
+          <li>100% verificado, sem fakes</li>
+          <li>Feed, Radar, Chat e Busca inclusos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BROWSERS -->
+<section class="browsers">
+  <div class="browsers-inner">
+    <h2>Chrome. Safari. Edge.<br>Mobile. Tablet. Desktop.</h2>
+    <p class="browsers-subtitle">Abre o navegador e pronto. Funciona em todos.</p>
+    <div class="browsers-grid">
+      <!-- Chrome -->
+      <div class="browser-item">
+        <div class="browser-icon">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#888" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="8" fill="none" stroke="#aaa" stroke-width="1.5"/>
+            <line x1="24" y1="4" x2="24" y2="16" stroke="#888" stroke-width="1.5"/>
+            <line x1="6.8" y1="34" x2="17" y2="28" stroke="#888" stroke-width="1.5"/>
+            <line x1="41.2" y1="34" x2="31" y2="28" stroke="#888" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span>Chrome</span>
+      </div>
+      <!-- Safari -->
+      <div class="browser-item">
+        <div class="browser-icon">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#888" stroke-width="1.5"/>
+            <line x1="16" y1="16" x2="28" y2="22" stroke="#aaa" stroke-width="1.5"/>
+            <line x1="28" y1="22" x2="32" y2="32" stroke="#888" stroke-width="1.5"/>
+            <line x1="32" y1="32" x2="20" y2="26" stroke="#aaa" stroke-width="1.5"/>
+            <line x1="20" y1="26" x2="16" y2="16" stroke="#888" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span>Safari</span>
+      </div>
+      <!-- Edge -->
+      <div class="browser-item">
+        <div class="browser-icon">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#888" stroke-width="1.5"/>
+            <path d="M14 30 Q14 16 28 14 Q20 18 20 26 Q20 30 24 32 Q16 34 14 30Z" fill="none" stroke="#aaa" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span>Edge</span>
+      </div>
+      <!-- Firefox -->
+      <div class="browser-item">
+        <div class="browser-icon">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#888" stroke-width="1.5"/>
+            <path d="M18 12 Q26 10 32 16 Q36 22 34 30 Q30 36 24 36 Q18 36 14 30" fill="none" stroke="#aaa" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="6" fill="none" stroke="#888" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span>Firefox</span>
+      </div>
+      <!-- Opera -->
+      <div class="browser-item">
+        <div class="browser-icon">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#888" stroke-width="1.5"/>
+            <ellipse cx="24" cy="24" rx="8" ry="14" fill="none" stroke="#aaa" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span>Opera</span>
+      </div>
+    </div>
+    <p class="browsers-devices">Funciona em todos</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <h2>Tudo incluso. Sem surpresa.</h2>
+    <div class="features-grid">
+      <!-- Radar -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="1" fill="#f8b506" stroke="none"/>
+            <path d="M12 3 A9 9 0 0 1 21 12"/>
+            <path d="M12 7 A5 5 0 0 1 17 12"/>
+          </svg>
+        </div>
+        <h3>Radar</h3>
+        <p>Quem ta perto de voce, agora</p>
+      </div>
+      <!-- Feed -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <line x1="7" y1="8" x2="17" y2="8"/>
+            <line x1="7" y1="12" x2="17" y2="12"/>
+            <line x1="7" y1="16" x2="13" y2="16"/>
+          </svg>
+        </div>
+        <h3>Feed</h3>
+        <p>Posts, fotos e atualizacoes</p>
+      </div>
+      <!-- Chat -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <h3>Chat</h3>
+        <p>Conversa privada e direta</p>
+      </div>
+      <!-- Busca -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+        </div>
+        <h3>Busca</h3>
+        <p>Filtra por cidade, idade, perfil</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <h2>Sem download.<br>Sem fake.<br>Sem frescura.</h2>
+    <a href="#" class="btn-cta-dark">Entrar agora</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>YAG Social — Todos os direitos reservados.</p>
+</footer>
+
+<!-- Scroll reveal -->
+<script>
+(function(){
+  const sections = document.querySelectorAll('.compare, .browsers, .features, .cta-final');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  sections.forEach(s => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(32px)';
+    s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(s);
+  });
+})();
+</script>
+
+</body>
+</html>
